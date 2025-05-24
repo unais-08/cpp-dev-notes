@@ -6,11 +6,11 @@
  * Date: 2025-05-23
  */
 
-#include <iostream>   // For std::cout, std::endl
-#include <string>     // For std::string
-#include <vector>     // For std::vector
-#include <functional> // For std::function (modern C++ function pointers)
-#include <numeric>    // For std::accumulate
+#include <iostream>    // For std::cout, std::endl
+#include <string>      // For std::string
+#include <vector>      // For std::vector
+#include <functional>  // For std::function (modern C++ function pointers)
+#include <numeric>     // For std::accumulate
 
 // =========================================================================
 // 1. Function Pointers: Deeper Dive
@@ -28,8 +28,14 @@
  */
 
 // Example 1.1: Declaring and using a function pointer
-int add(int a, int b) { return a + b; }
-int subtract(int a, int b) { return a - b; }
+int add(int a, int b)
+{
+    return a + b;
+}
+int subtract(int a, int b)
+{
+    return a - b;
+}
 
 // Function that takes a function pointer as an argument (callback pattern)
 void calculateAndPrint(int x, int y, int (*operation)(int, int))
@@ -39,7 +45,7 @@ void calculateAndPrint(int x, int y, int (*operation)(int, int))
 }
 
 // Example 1.2: Array of function pointers
-typedef int (*MathOperation)(int, int); // Using typedef for readability
+typedef int (*MathOperation)(int, int);  // Using typedef for readability
 
 // Example 1.3: Returning a function pointer (e.g., a factory for operations)
 MathOperation getOperation(char op_char)
@@ -52,7 +58,7 @@ MathOperation getOperation(char op_char)
     {
         return subtract;
     }
-    return nullptr; // Return null for unsupported operations
+    return nullptr;  // Return null for unsupported operations
 }
 
 // =========================================================================
@@ -91,32 +97,31 @@ void performLambdaOperations()
     int y = 5;
 
     // Lambda with no capture
-    auto sum_lambda = [](int a, int b)
-    { return a + b; };
+    auto sum_lambda = [](int a, int b) { return a + b; };
     std::cout << "2.1 Lambda sum (no capture): " << sum_lambda(x, y) << std::endl;
 
     // Lambda capturing by value
-    auto multiply_lambda = [x, y](int factor)
-    { return (x * y) * factor; };
+    auto multiply_lambda = [x, y](int factor) { return (x * y) * factor; };
     std::cout << "2.1 Lambda multiply (capture by value): " << multiply_lambda(2) << std::endl;
-    x = 20;                                                                                    // Changing x won't affect multiply_lambda's captured x
-    std::cout << "2.1 Lambda multiply (after x changed): " << multiply_lambda(2) << std::endl; // Still uses original x=10
+    x = 20;  // Changing x won't affect multiply_lambda's captured x
+    std::cout << "2.1 Lambda multiply (after x changed): " << multiply_lambda(2)
+              << std::endl;  // Still uses original x=10
 
     // Lambda capturing by reference
     int counter = 0;
-    auto increment_lambda = [&counter]()
-    { counter++; };
+    auto increment_lambda = [&counter]() { counter++; };
     increment_lambda();
     increment_lambda();
-    std::cout << "2.1 Lambda increment (capture by reference): " << counter << std::endl; // counter is 2
+    std::cout << "2.1 Lambda increment (capture by reference): " << counter
+              << std::endl;  // counter is 2
 
     // Lambda with explicit return type and mutable keyword (for modifying captured by value)
     auto mutable_lambda = [val = 10]() mutable { // val is captured by value, but can be modified internally
         val++;
         return val;
     };
-    std::cout << "2.1 Mutable lambda: " << mutable_lambda() << std::endl; // 11
-    std::cout << "2.1 Mutable lambda: " << mutable_lambda() << std::endl; // 12
+    std::cout << "2.1 Mutable lambda: " << mutable_lambda() << std::endl;  // 11
+    std::cout << "2.1 Mutable lambda: " << mutable_lambda() << std::endl;  // 12
 }
 
 // Example 2.2: Lambdas with Standard Library Algorithms
@@ -126,14 +131,12 @@ void processVectorWithLambda()
     std::vector<int> squared_numbers;
 
     // Use lambda with std::for_each
-    std::for_each(numbers.begin(), numbers.end(), [](int n)
-                  { std::cout << n << " "; });
+    std::for_each(numbers.begin(), numbers.end(), [](int n) { std::cout << n << " "; });
     std::cout << std::endl;
 
     // Use lambda with std::transform
     std::transform(numbers.begin(), numbers.end(), std::back_inserter(squared_numbers),
-                   [](int n)
-                   { return n * n; });
+                   [](int n) { return n * n; });
 
     std::cout << "2.2 Squared numbers: ";
     for (int n : squared_numbers)
@@ -160,25 +163,22 @@ void processVectorWithLambda()
 // Example 3.1: Basic Functor
 class Multiplier
 {
-public:
-    int factor; // State of the functor
+   public:
+    int factor;  // State of the functor
 
-    Multiplier(int f) : factor(f) {} // Constructor
+    Multiplier(int f) : factor(f) {}  // Constructor
 
     // Overload the function call operator
-    int operator()(int num) const
-    {
-        return num * factor;
-    }
+    int operator()(int num) const { return num * factor; }
 };
 
 // Example 3.2: Functor with more complex state
 class Accumulator
 {
-private:
+   private:
     int current_sum;
 
-public:
+   public:
     Accumulator() : current_sum(0) {}
 
     void operator()(int val)
@@ -201,7 +201,8 @@ public:
  * -   Inherited from C. Use `...` in parameter list.
  * -   Require `<cstdarg>` for `va_list`, `va_start`, `va_arg`, `va_end`.
  * -   **Type-unsafe:** No compile-time type checking for the variable arguments.
- * -   **Generally discouraged in modern C++** in favor of variadic templates or `std::initializer_list`.
+ * -   **Generally discouraged in modern C++** in favor of variadic templates or
+ * `std::initializer_list`.
  */
 
 // Example 4.1: C-style variadic sum (for demonstration, not recommended)
@@ -210,12 +211,12 @@ double sum_c_style(int count, ...)
 {
     double total = 0.0;
     va_list args;
-    va_start(args, count); // Initialize va_list
+    va_start(args, count);  // Initialize va_list
     for (int i = 0; i < count; ++i)
     {
-        total += va_arg(args, double); // Retrieve argument (must specify type)
+        total += va_arg(args, double);  // Retrieve argument (must specify type)
     }
-    va_end(args); // Clean up va_list
+    va_end(args);  // Clean up va_list
     return total;
 }
 
@@ -229,13 +230,13 @@ double sum_c_style(int count, ...)
 // Example 4.2: Variadic Template Sum (recursive approach)
 template <typename T>
 T sum_variadic(T t)
-{ // Base case for recursion
+{  // Base case for recursion
     return t;
 }
 
 template <typename T, typename... Args>
 T sum_variadic(T first, Args... rest)
-{ // Recursive case
+{  // Recursive case
     return first + sum_variadic(rest...);
 }
 
@@ -243,7 +244,7 @@ T sum_variadic(T first, Args... rest)
 template <typename... Args>
 auto sum_fold_expression(Args... args)
 {
-    return (args + ...); // Fold expression: sums all arguments
+    return (args + ...);  // Fold expression: sums all arguments
 }
 
 // =========================================================================
@@ -300,16 +301,26 @@ constexpr int getSquare(int n)
  * -   **General Order of Preference:**
  * 1.  **Exact Match:** An overload whose parameters exactly match the types of the arguments.
  * 2.  **Promotion:** Arguments can be promoted (e.g., `char` to `int`, `float` to `double`).
- * 3.  **Standard Conversions:** Arguments can be converted (e.g., `int` to `double`, `double` to `int`, `Derived*` to `Base*`).
+ * 3.  **Standard Conversions:** Arguments can be converted (e.g., `int` to `double`, `double` to
+ * `int`, `Derived*` to `Base*`).
  * 4.  **User-defined Conversions:** Conversions defined by constructors or conversion operators.
  * 5.  **Ellipsis (`...`):** C-style variadic functions are the lowest priority.
  * -   If multiple overloads are equally good matches, it results in an **ambiguity error**.
  */
 
 // Example 6.1: Overload Resolution
-void process(int i) { std::cout << "6.1 Processing int: " << i << std::endl; }
-void process(double d) { std::cout << "6.1 Processing double: " << d << std::endl; }
-void process(char c) { std::cout << "6.1 Processing char: " << c << std::endl; }
+void process(int i)
+{
+    std::cout << "6.1 Processing int: " << i << std::endl;
+}
+void process(double d)
+{
+    std::cout << "6.1 Processing double: " << d << std::endl;
+}
+void process(char c)
+{
+    std::cout << "6.1 Processing char: " << c << std::endl;
+}
 
 // =========================================================================
 // Main Function (Entry Point of the Program)
@@ -318,16 +329,18 @@ void process(char c) { std::cout << "6.1 Processing char: " << c << std::endl; }
 int main()
 {
     std::cout << "--- Section 1: Function Pointers ---" << std::endl;
-    int (*funcPtr)(int, int);                                                               // Declare a function pointer
-    funcPtr = add;                                                                          // Assign the address of the 'add' function
-    std::cout << "1.1 Using function pointer (add): " << funcPtr(10, 20) << std::endl;      // Calls add(10, 20)
-    funcPtr = subtract;                                                                     // Assign the address of the 'subtract' function
-    std::cout << "1.1 Using function pointer (subtract): " << funcPtr(10, 20) << std::endl; // Calls subtract(10, 20)
+    int (*funcPtr)(int, int);  // Declare a function pointer
+    funcPtr = add;             // Assign the address of the 'add' function
+    std::cout << "1.1 Using function pointer (add): " << funcPtr(10, 20)
+              << std::endl;  // Calls add(10, 20)
+    funcPtr = subtract;      // Assign the address of the 'subtract' function
+    std::cout << "1.1 Using function pointer (subtract): " << funcPtr(10, 20)
+              << std::endl;  // Calls subtract(10, 20)
 
-    calculateAndPrint(25, 15, add);      // Pass 'add' function
-    calculateAndPrint(25, 15, subtract); // Pass 'subtract' function
+    calculateAndPrint(25, 15, add);       // Pass 'add' function
+    calculateAndPrint(25, 15, subtract);  // Pass 'subtract' function
 
-    MathOperation ops[] = {add, subtract}; // Array of function pointers
+    MathOperation ops[] = {add, subtract};  // Array of function pointers
     std::cout << "1.2 Using array of function pointers (add): " << ops[0](5, 3) << std::endl;
     std::cout << "1.2 Using array of function pointers (subtract): " << ops[1](5, 3) << std::endl;
 
@@ -336,7 +349,7 @@ int main()
     {
         std::cout << "1.3 Chosen operation ('+'): " << chosenOp(7, 3) << std::endl;
     }
-    chosenOp = getOperation('*'); // Unsupported
+    chosenOp = getOperation('*');  // Unsupported
     if (!chosenOp)
     {
         std::cout << "1.3 Chosen operation ('*'): Unsupported." << std::endl;
@@ -348,33 +361,38 @@ int main()
 
     std::cout << "\n--- Section 3: Function Objects (Functors) ---" << std::endl;
     Multiplier multiplyBy3(3);
-    std::cout << "3.1 Multiplier by 3: " << multiplyBy3(7) << std::endl; // Calls operator()(7)
+    std::cout << "3.1 Multiplier by 3: " << multiplyBy3(7) << std::endl;  // Calls operator()(7)
 
     Accumulator acc;
-    acc(10); // Calls operator()(10)
-    acc(20); // Calls operator()(20)
+    acc(10);  // Calls operator()(10)
+    acc(20);  // Calls operator()(20)
     std::cout << "3.2 Final accumulated sum: " << acc.getSum() << std::endl;
 
     std::cout << "\n--- Section 4: Variadic Functions/Templates ---" << std::endl;
-    std::cout << "4.1 C-style variadic sum (double): " << sum_c_style(3, 1.1, 2.2, 3.3) << std::endl;
-    std::cout << "4.2 Variadic template sum (recursive): " << sum_variadic(1, 2, 3, 4, 5) << std::endl;
-    std::cout << "4.3 Variadic template sum (fold expression): " << sum_fold_expression(10, 20, 30) << std::endl;
-    std::cout << "4.3 Variadic template sum (mixed types, fold expression): " << sum_fold_expression(1.5, 2, 3.0) << std::endl;
+    std::cout << "4.1 C-style variadic sum (double): " << sum_c_style(3, 1.1, 2.2, 3.3)
+              << std::endl;
+    std::cout << "4.2 Variadic template sum (recursive): " << sum_variadic(1, 2, 3, 4, 5)
+              << std::endl;
+    std::cout << "4.3 Variadic template sum (fold expression): " << sum_fold_expression(10, 20, 30)
+              << std::endl;
+    std::cout << "4.3 Variadic template sum (mixed types, fold expression): "
+              << sum_fold_expression(1.5, 2, 3.0) << std::endl;
 
     std::cout << "\n--- Section 5: Function Specifiers ---" << std::endl;
     safeOperation();
     // Using constexpr function
-    constexpr int compileTimeSquare = getSquare(10); // Evaluated at compile time
+    constexpr int compileTimeSquare = getSquare(10);  // Evaluated at compile time
     std::cout << "5.2 Compile-time square of 10: " << compileTimeSquare << std::endl;
     int runtimeVal = 7;
-    int runtimeSquare = getSquare(runtimeVal); // Evaluated at runtime
+    int runtimeSquare = getSquare(runtimeVal);  // Evaluated at runtime
     std::cout << "5.2 Runtime square of 7: " << runtimeSquare << std::endl;
 
     std::cout << "\n--- Section 6: Overload Resolution ---" << std::endl;
-    process(5);   // Calls process(int)
-    process(5.5); // Calls process(double)
-    process('A'); // Calls process(char) - char promotes to int if char overload not present
-    // process(5L); // Might be ambiguous or call process(double) depending on compiler rules/conversions
+    process(5);    // Calls process(int)
+    process(5.5);  // Calls process(double)
+    process('A');  // Calls process(char) - char promotes to int if char overload not present
+    // process(5L); // Might be ambiguous or call process(double) depending on compiler
+    // rules/conversions
 
     return 0;
 }

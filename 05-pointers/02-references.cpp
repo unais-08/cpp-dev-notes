@@ -7,9 +7,9 @@
  * Date: 2025-05-23
  */
 
-#include <iostream> // For std::cout, std::endl
-#include <string>   // For std::string
-#include <vector>   // For std::vector (to show passing large objects)
+#include <iostream>  // For std::cout, std::endl
+#include <string>    // For std::string
+#include <vector>    // For std::vector (to show passing large objects)
 
 // =========================================================================
 // 1. Introduction: What are References?
@@ -38,7 +38,8 @@
 /**
  * **2. Declaration and Initialization:**
  * -   **Syntax:** `dataType& referenceName = existingVariable;`
- * -   The `&` symbol indicates a reference. It's placed after the type, before the name, or in between.
+ * -   The `&` symbol indicates a reference. It's placed after the type, before the name, or in
+ * between.
  * -   **Crucial Rule:** A reference **MUST be initialized** at the time of declaration.
  * It cannot be declared without an initializer.
  * -   Once initialized, a reference **cannot be reseated** (made to refer to a different variable).
@@ -49,28 +50,29 @@
 void demonstrateBasicReference()
 {
     int score = 100;
-    int &refScore = score; // refScore is now an alias for 'score'
+    int& refScore = score;  // refScore is now an alias for 'score'
 
     std::cout << "--- 2. Basic Reference Example ---" << std::endl;
-    std::cout << "Original score: " << score << std::endl;        // Output: 100
-    std::cout << "Reference refScore: " << refScore << std::endl; // Output: 100
+    std::cout << "Original score: " << score << std::endl;         // Output: 100
+    std::cout << "Reference refScore: " << refScore << std::endl;  // Output: 100
 
-    refScore = 200;                                                        // Modifying refScore actually modifies 'score'
-    std::cout << "Score after modifying refScore: " << score << std::endl; // Output: 200
+    refScore = 200;  // Modifying refScore actually modifies 'score'
+    std::cout << "Score after modifying refScore: " << score << std::endl;  // Output: 200
 
-    score = 300;                                                              // Modifying score also affects refScore
-    std::cout << "RefScore after modifying score: " << refScore << std::endl; // Output: 300
+    score = 300;  // Modifying score also affects refScore
+    std::cout << "RefScore after modifying score: " << refScore << std::endl;  // Output: 300
 
     // Getting addresses to prove they are the same
     std::cout << "Address of score: " << &score << std::endl;
-    std::cout << "Address of refScore: " << &refScore << std::endl; // Same address!
+    std::cout << "Address of refScore: " << &refScore << std::endl;  // Same address!
 
     // int& uninitializedRef; // ERROR: References must be initialized
     // int anotherVal = 400;
-    // refScore = anotherVal; // This is assignment, NOT reseating. It changes score to 400, not makes refScore refer to anotherVal.
-    // std::cout << "Score after attempted 'reseating': " << score << std::endl; // Output: 400
-    // std::cout << "Address of anotherVal: " << &anotherVal << std::endl; // Different address
-    // std::cout << "Address of refScore (still same as score): " << &refScore << std::endl; // Still same as score
+    // refScore = anotherVal; // This is assignment, NOT reseating. It changes score to 400, not
+    // makes refScore refer to anotherVal. std::cout << "Score after attempted 'reseating': " <<
+    // score << std::endl; // Output: 400 std::cout << "Address of anotherVal: " << &anotherVal <<
+    // std::endl; // Different address std::cout << "Address of refScore (still same as score): " <<
+    // &refScore << std::endl; // Still same as score
 }
 
 // =========================================================================
@@ -87,18 +89,19 @@ void demonstrateBasicReference()
  * -   This is one of the most common and powerful uses of references.
  * -   Allows a function to directly access and modify the original argument passed from the caller.
  * -   Avoids the overhead of copying large objects (unlike pass by value).
- * -   Often preferred over passing by pointer when the parameter is guaranteed to exist and not be null.
+ * -   Often preferred over passing by pointer when the parameter is guaranteed to exist and not be
+ * null.
  */
 
 // Example 3.1.1: Modifying a variable using pass by reference
-void increment(int &num)
-{          // 'num' is a reference to the original variable
-    num++; // Modifies the original variable
+void increment(int& num)
+{           // 'num' is a reference to the original variable
+    num++;  // Modifies the original variable
     std::cout << "3.1.1 Inside increment: " << num << std::endl;
 }
 
 // Example 3.1.2: Swapping values using pass by reference
-void swap(int &a, int &b)
+void swap(int& a, int& b)
 {
     int temp = a;
     a = b;
@@ -106,11 +109,11 @@ void swap(int &a, int &b)
 }
 
 // Example 3.1.3: Passing large objects efficiently by reference
-void processVector(std::vector<int> &vec)
-{ // Reference to avoid copying the whole vector
+void processVector(std::vector<int>& vec)
+{  // Reference to avoid copying the whole vector
     if (!vec.empty())
     {
-        vec[0] = 999; // Modifies the original vector
+        vec[0] = 999;  // Modifies the original vector
     }
     std::cout << "3.1.3 Inside processVector, first element: " << vec[0] << std::endl;
 }
@@ -118,12 +121,14 @@ void processVector(std::vector<int> &vec)
 /**
  * **3.2. References as Return Values:**
  * -   A function can return a reference to a variable.
- * -   This allows the caller to modify the original variable that the function returned a reference to.
- * -   **CRITICAL CAUTION:** Never return a reference to a **local variable** declared inside the function.
- * Local variables are destroyed when the function exits, making the returned reference a **dangling reference**
- * (it refers to invalid, freed memory).
+ * -   This allows the caller to modify the original variable that the function returned a reference
+ * to.
+ * -   **CRITICAL CAUTION:** Never return a reference to a **local variable** declared inside the
+ * function. Local variables are destroyed when the function exits, making the returned reference a
+ * **dangling reference** (it refers to invalid, freed memory).
  * -   It's safe to return references to:
- * -   Parameters that were passed by reference (if their lifetime extends beyond the function call).
+ * -   Parameters that were passed by reference (if their lifetime extends beyond the function
+ * call).
  * -   Static variables.
  * -   Members of objects that persist beyond the function call.
  */
@@ -135,17 +140,18 @@ void processVector(std::vector<int> &vec)
 // }
 
 // Example 3.2.2: Safe - Returning reference to a static variable
-int &getStaticCounter()
+int& getStaticCounter()
 {
-    static int counter = 0; // Static variable persists throughout program execution
+    static int counter = 0;  // Static variable persists throughout program execution
     counter++;
     return counter;
 }
 
-// Example 3.2.3: Safe - Returning reference to an element of an array/vector (assuming it lives long enough)
-int &getVectorElement(std::vector<int> &v, int index)
+// Example 3.2.3: Safe - Returning reference to an element of an array/vector (assuming it lives
+// long enough)
+int& getVectorElement(std::vector<int>& v, int index)
 {
-    return v.at(index); // .at() provides bounds checking
+    return v.at(index);  // .at() provides bounds checking
 }
 
 // =========================================================================
@@ -159,18 +165,19 @@ int &getVectorElement(std::vector<int> &v, int index)
  * -   **Key Advantages:**
  * -   **Safety:** Guarantees that the referenced variable will not be changed.
  * -   **Efficiency:** Still avoids copying large objects when passing to functions.
- * -   **Flexibility:** Can bind to `const` objects, non-`const` objects, and even **rvalues** (temporary values or literals).
+ * -   **Flexibility:** Can bind to `const` objects, non-`const` objects, and even **rvalues**
+ * (temporary values or literals).
  */
 
 // Example 4.1.1: const reference to prevent modification
-void printValue(const int &num)
+void printValue(const int& num)
 {
     // num++; // ERROR: cannot modify through a const reference
     std::cout << "4.1.1 Value via const reference: " << num << std::endl;
 }
 
 // Example 4.1.2: const reference binding to temporaries/rvalues
-void processConstString(const std::string &s)
+void processConstString(const std::string& s)
 {
     std::cout << "4.1.2 Processing string: " << s << ", length: " << s.length() << std::endl;
 }
@@ -182,16 +189,20 @@ void processConstString(const std::string &s)
 /**
  * **5. References vs. Pointers: Key Differences**
  *
- * | Feature            | Reference (`&`)                                  | Pointer (`*`)                                  |
- * | :----------------- | :----------------------------------------------- | :----------------------------------------------- |
- * | **Initialization** | Must be initialized at declaration.              | Can be declared uninitialized (wild pointer - DANGER!). |
- * | **Nullability** | Cannot be null (must refer to a valid object).   | Can be `nullptr` (or `NULL` or `0`).           |
- * | **Reseating** | Cannot be reseated; always refers to original.   | Can be reseated (made to point to another object). |
- * | **Dereferencing** | No explicit dereference operator needed (`*`).   | Requires explicit dereference operator (`*`).     |
- * | **Arithmetic** | No direct arithmetic operations.                 | Supports arithmetic operations (`++`, `--`, `+`, `-`). |
- * | **Syntax** | Cleaner, more like using the original variable.  | Explicit `*` and `&` operators can make code verbose. |
- * | **Memory** | Not generally considered a separate object with its own address, but compiler may optimize. | Always has its own memory address.               |
- * | **Ownership** | Does not imply ownership.                        | Can imply ownership (with `new`/`delete` or smart pointers). |
+ * | Feature            | Reference (`&`)                                  | Pointer (`*`) | |
+ * :----------------- | :----------------------------------------------- |
+ * :----------------------------------------------- | | **Initialization** | Must be initialized at
+ * declaration.              | Can be declared uninitialized (wild pointer - DANGER!). | |
+ * **Nullability** | Cannot be null (must refer to a valid object).   | Can be `nullptr` (or `NULL`
+ * or `0`).           | | **Reseating** | Cannot be reseated; always refers to original.   | Can be
+ * reseated (made to point to another object). | | **Dereferencing** | No explicit dereference
+ * operator needed (`*`).   | Requires explicit dereference operator (`*`).     | | **Arithmetic** |
+ * No direct arithmetic operations.                 | Supports arithmetic operations (`++`, `--`,
+ * `+`, `-`). | | **Syntax** | Cleaner, more like using the original variable.  | Explicit `*` and
+ * `&` operators can make code verbose. | | **Memory** | Not generally considered a separate object
+ * with its own address, but compiler may optimize. | Always has its own memory address. | |
+ * **Ownership** | Does not imply ownership.                        | Can imply ownership (with
+ * `new`/`delete` or smart pointers). |
  *
  * **When to Use Which:**
  * -   **Use References:**
@@ -211,18 +222,19 @@ void processConstString(const std::string &s)
 void comparePointersAndReferences()
 {
     int value = 10;
-    int &ref = value;  // Reference to 'value'
-    int *ptr = &value; // Pointer to 'value'
+    int& ref = value;   // Reference to 'value'
+    int* ptr = &value;  // Pointer to 'value'
 
     std::cout << "\n--- 5. References vs. Pointers Example ---" << std::endl;
     std::cout << "Value: " << value << std::endl;
     std::cout << "Reference (ref): " << ref << ", Address: " << &ref << std::endl;
-    std::cout << "Pointer (ptr): " << ptr << ", Dereferenced (*ptr): " << *ptr << ", Address: " << &ptr << std::endl;
+    std::cout << "Pointer (ptr): " << ptr << ", Dereferenced (*ptr): " << *ptr
+              << ", Address: " << &ptr << std::endl;
 
     // Reseating
     int anotherValue = 20;
     // ref = anotherValue; // This assigns 20 to 'value', doesn't make 'ref' point to 'anotherValue'
-    ptr = &anotherValue; // Pointer can be reseated
+    ptr = &anotherValue;  // Pointer can be reseated
     std::cout << "After ptr reseated to anotherValue: " << *ptr << std::endl;
 }
 
@@ -238,15 +250,16 @@ void comparePointersAndReferences()
  * (e.g., temporary objects, literals like `10`, results of expressions like `a + b`).
  * -   They allow you to "steal" resources from temporary objects, improving performance
  * by avoiding unnecessary copies.
- * -   This is an advanced topic, but it's important to know `&&` is not just "reference to a reference."
+ * -   This is an advanced topic, but it's important to know `&&` is not just "reference to a
+ * reference."
  */
 
 // Example 6.1: Basic Rvalue Reference concept
-void processRvalue(int &&tempVal)
-{ // tempVal is an rvalue reference
+void processRvalue(int&& tempVal)
+{  // tempVal is an rvalue reference
     std::cout << "6.1 Processing rvalue: " << tempVal << std::endl;
-    // tempVal can be modified here because it's a "named rvalue reference", which behaves like an lvalue.
-    // However, it's typically used for moving resources.
+    // tempVal can be modified here because it's a "named rvalue reference", which behaves like an
+    // lvalue. However, it's typically used for moving resources.
 }
 
 // =========================================================================
@@ -299,8 +312,8 @@ void processRvalue(int &&tempVal)
  *
  * 8.3. **Avoid Returning References to Local Variables:**
  * -   This is a critical rule to prevent dangling references. Only return references to variables
- * whose lifetime extends beyond the function call (e.g., static variables, dynamically allocated memory,
- * or members of objects passed by reference).
+ * whose lifetime extends beyond the function call (e.g., static variables, dynamically allocated
+ * memory, or members of objects passed by reference).
  *
  * 8.4. **Favor References over Pointers when Nullability is Not an Issue:**
  * -   If a parameter or return value is guaranteed to always refer to a valid object, references
@@ -322,43 +335,46 @@ int main()
     std::cout << "\n--- 3.1. References as Function Parameters ---" << std::endl;
     int myValue = 5;
     std::cout << "Before increment: " << myValue << std::endl;
-    increment(myValue);                                       // Pass by reference
-    std::cout << "After increment: " << myValue << std::endl; // myValue is now 6
+    increment(myValue);                                        // Pass by reference
+    std::cout << "After increment: " << myValue << std::endl;  // myValue is now 6
 
     int x = 10, y = 20;
     std::cout << "Before swap: x=" << x << ", y=" << y << std::endl;
-    swap(x, y);                                                     // Pass by reference
-    std::cout << "After swap: x=" << x << ", y=" << y << std::endl; // x=20, y=10
+    swap(x, y);                                                      // Pass by reference
+    std::cout << "After swap: x=" << x << ", y=" << y << std::endl;  // x=20, y=10
 
     std::vector<int> myVec = {10, 20, 30};
     std::cout << "Before processVector, first element: " << myVec[0] << std::endl;
     processVector(myVec);
-    std::cout << "After processVector, first element: " << myVec[0] << std::endl; // myVec[0] is now 999
+    std::cout << "After processVector, first element: " << myVec[0]
+              << std::endl;  // myVec[0] is now 999
 
     std::cout << "\n--- 3.2. References as Return Values ---" << std::endl;
-    std::cout << "Static counter initial: " << getStaticCounter() << std::endl;            // Returns 1 (counter was 0, now 1)
-    getStaticCounter() = 500;                                                              // Modifies the static counter via reference
-    std::cout << "Static counter after modification: " << getStaticCounter() << std::endl; // Returns 501
+    std::cout << "Static counter initial: " << getStaticCounter()
+              << std::endl;    // Returns 1 (counter was 0, now 1)
+    getStaticCounter() = 500;  // Modifies the static counter via reference
+    std::cout << "Static counter after modification: " << getStaticCounter()
+              << std::endl;  // Returns 501
 
     std::vector<int> dataVec = {10, 20, 30};
     std::cout << "Original dataVec[1]: " << dataVec[1] << std::endl;
-    getVectorElement(dataVec, 1) = 77; // Modify dataVec[1] via returned reference
+    getVectorElement(dataVec, 1) = 77;  // Modify dataVec[1] via returned reference
     std::cout << "Modified dataVec[1]: " << dataVec[1] << std::endl;
 
     std::cout << "\n--- 4. Const References ---" << std::endl;
     int constVal = 10;
-    printValue(constVal);     // Binds to lvalue
-    printValue(20);           // Binds to rvalue (temporary)
-    printValue(constVal + 5); // Binds to rvalue (result of expression)
+    printValue(constVal);      // Binds to lvalue
+    printValue(20);            // Binds to rvalue (temporary)
+    printValue(constVal + 5);  // Binds to rvalue (result of expression)
 
-    processConstString("Temporary string literal"); // Binds to rvalue
+    processConstString("Temporary string literal");  // Binds to rvalue
     std::string existingString = "Existing String";
-    processConstString(existingString); // Binds to lvalue
+    processConstString(existingString);  // Binds to lvalue
 
     comparePointersAndReferences();
 
     std::cout << "\n--- 6. Rvalue References (Brief) ---" << std::endl;
-    processRvalue(42); // Binds to an rvalue
+    processRvalue(42);  // Binds to an rvalue
     // int lval = 10;
     // processRvalue(lval); // ERROR: cannot bind rvalue reference to lvalue
 

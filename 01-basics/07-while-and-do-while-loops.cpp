@@ -20,21 +20,22 @@ int main()
     // If the condition is initially false, the loop body never executes.
     int count = 0;
     while (count < 5)
-    { // Condition: Loop as long as count is less than 5
+    {  // Condition: Loop as long as count is less than 5
         std::cout << "while loop count: " << count << std::endl;
-        count++; // Increment count to avoid an infinite loop
+        count++;  // Increment count to avoid an infinite loop
     }
     std::cout << "while loop finished." << std::endl;
 
     std::cout << "\n--- 2. do-while Loop (Exit-Controlled Loop) ---" << std::endl;
     // The 'do-while' loop checks the condition *after* each iteration.
-    // This means the loop body *always* executes at least once, even if the condition is initially false.
+    // This means the loop body *always* executes at least once, even if the condition is initially
+    // false.
     int num = 10;
     do
     {
         std::cout << "do-while loop num: " << num << std::endl;
-        num -= 2; // Decrement num
-    } while (num > 0); // Condition: Loop as long as num is greater than 0
+        num -= 2;  // Decrement num
+    } while (num > 0);  // Condition: Loop as long as num is greater than 0
     std::cout << "do-while loop finished." << std::endl;
 
     std::cout << "\n--- 3. Using 'break' to Exit a Loop ---" << std::endl;
@@ -42,12 +43,12 @@ int main()
     // (either 'while', 'do-while', or 'for').
     int i = 0;
     while (true)
-    { // Infinite loop (we'll break out of it)
+    {  // Infinite loop (we'll break out of it)
         std::cout << "i: " << i << std::endl;
         if (i == 3)
         {
             std::cout << "Breaking out of the loop when i is 3." << std::endl;
-            break; // Exit the loop
+            break;  // Exit the loop
         }
         i++;
     }
@@ -60,7 +61,7 @@ int main()
         if (j == 2)
         {
             std::cout << "Skipping iteration 2 (continue)." << std::endl;
-            continue; // Skip the rest of this iteration
+            continue;  // Skip the rest of this iteration
         }
         std::cout << "j: " << j << std::endl;
     }
@@ -72,12 +73,12 @@ int main()
     do
     {
         std::cout << "Enter your age (must be between 0 and 120): ";
-        std::cin >> age; // Read input from the user
+        std::cin >> age;  // Read input from the user
         if (age < 0 || age > 120)
         {
             std::cout << "Invalid age. Please try again." << std::endl;
         }
-    } while (age < 0 || age > 120); // Loop continues as long as the age is invalid
+    } while (age < 0 || age > 120);  // Loop continues as long as the age is invalid
     std::cout << "Valid age entered: " << age << std::endl;
 
     // Return 0 to indicate successful program execution.

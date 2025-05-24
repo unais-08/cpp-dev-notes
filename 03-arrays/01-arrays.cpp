@@ -7,11 +7,11 @@
  * Date: 2025-05-23
  */
 
-#include <iostream> // For std::cout, std::endl
-#include <string>   // For std::string (for string arrays)
-#include <array>    // For std::array (C++11 fixed-size array wrapper)
-#include <vector>   // For std::vector (C++ dynamic array)
-#include <numeric>  // For std::accumulate (useful with arrays/vectors)
+#include <iostream>  // For std::cout, std::endl
+#include <string>    // For std::string (for string arrays)
+#include <array>     // For std::array (C++11 fixed-size array wrapper)
+#include <vector>    // For std::vector (C++ dynamic array)
+#include <numeric>   // For std::accumulate (useful with arrays/vectors)
 
 // =========================================================================
 // 1. Introduction: What are Arrays?
@@ -24,8 +24,10 @@
  * -   This contiguous storage allows for very fast access to elements using their index.
  * -   Arrays are fundamental data structures in C++ and many other programming languages.
  * -   **Key Characteristics:**
- * -   **Homogeneous:** All elements must be of the same type (e.g., all `int`, all `double`, all `std::string`).
- * -   **Fixed Size:** Once an array is declared with a certain size, that size cannot be changed during runtime.
+ * -   **Homogeneous:** All elements must be of the same type (e.g., all `int`, all `double`, all
+ * `std::string`).
+ * -   **Fixed Size:** Once an array is declared with a certain size, that size cannot be changed
+ * during runtime.
  * -   **Zero-Indexed:** The first element is at index 0, the second at index 1, and so on.
  */
 
@@ -43,28 +45,30 @@
  */
 
 // Example 2.1.1: Basic array declaration
-int scores[5]; // Declares an array named 'scores' that can hold 5 integers.
-               // Elements are uninitialized.
+int scores[5];  // Declares an array named 'scores' that can hold 5 integers.
+                // Elements are uninitialized.
 
 /**
  * **2.2. Initialization during Declaration:**
  * -   You can initialize an array when you declare it using an initializer list `{}`.
- * -   If you provide fewer elements than the array size, the remaining elements are zero-initialized.
- * -   If you omit the size, the compiler automatically determines the size based on the number of elements provided.
+ * -   If you provide fewer elements than the array size, the remaining elements are
+ * zero-initialized.
+ * -   If you omit the size, the compiler automatically determines the size based on the number of
+ * elements provided.
  */
 
 // Example 2.2.1: Initializing with specific values
-int primeNumbers[5] = {2, 3, 5, 7, 11}; // Array of 5 integers, fully initialized.
+int primeNumbers[5] = {2, 3, 5, 7, 11};  // Array of 5 integers, fully initialized.
 
 // Example 2.2.2: Partial initialization (remaining elements are zero-initialized)
-int partialScores[10] = {10, 20, 30}; // partialScores[0]=10, [1]=20, [2]=30, [3-9]=0.
+int partialScores[10] = {10, 20, 30};  // partialScores[0]=10, [1]=20, [2]=30, [3-9]=0.
 
 // Example 2.2.3: Omitting size (compiler deduces size)
-int inferredArray[] = {100, 200, 300, 400}; // Size is 4.
+int inferredArray[] = {100, 200, 300, 400};  // Size is 4.
 
 // Example 2.2.4: Zero-initialization (all elements to 0)
-int zeroArray[5] = {};         // All 5 elements are initialized to 0.
-int anotherZeroArray[5] = {0}; // Also initializes all to 0.
+int zeroArray[5] = {};          // All 5 elements are initialized to 0.
+int anotherZeroArray[5] = {0};  // Also initializes all to 0.
 
 /**
  * **2.3. Character Arrays (C-style Strings):**
@@ -73,8 +77,8 @@ int anotherZeroArray[5] = {0}; // Also initializes all to 0.
  */
 
 // Example 2.3.1: Character array initialization
-char greeting[6] = {'H', 'e', 'l', 'l', 'o', '\0'}; // Explicit null termination.
-char name[] = "World";                              // Compiler adds '\0' automatically, size is 6 (W,o,r,l,d,\0).
+char greeting[6] = {'H', 'e', 'l', 'l', 'o', '\0'};  // Explicit null termination.
+char name[] = "World";  // Compiler adds '\0' automatically, size is 6 (W,o,r,l,d,\0).
 
 // =========================================================================
 // 3. Accessing Array Elements
@@ -84,9 +88,9 @@ char name[] = "World";                              // Compiler adds '\0' automa
  * **3. Accessing Array Elements**
  * -   Array elements are accessed using the **subscript operator `[]`** and their index.
  * -   Remember that arrays are zero-indexed.
- * -   **Caution: Array Bounds Checking:** C++ does NOT perform automatic bounds checking at runtime.
- * Accessing an index outside the valid range (e.g., `array[size]`) leads to **undefined behavior**,
- * which can cause crashes, corrupted data, or security vulnerabilities.
+ * -   **Caution: Array Bounds Checking:** C++ does NOT perform automatic bounds checking at
+ * runtime. Accessing an index outside the valid range (e.g., `array[size]`) leads to **undefined
+ * behavior**, which can cause crashes, corrupted data, or security vulnerabilities.
  */
 
 // Example 3.1: Accessing and modifying elements
@@ -113,7 +117,7 @@ void iterateArray(int arr[], int size)
 // Example 3.3: Range-based for loop (C++11 onwards)
 // This is generally preferred for iterating over entire arrays/containers.
 void iterateArrayRangeBased(int arr[], int size)
-{ // Note: for raw arrays, size is still needed
+{  // Note: for raw arrays, size is still needed
     std::cout << "3.3 Array elements (range-based for loop): ";
     // This syntax works directly on fixed-size arrays or std::array/std::vector
     // For raw arrays passed as pointers, you might need to know the size or use std::begin/std::end
@@ -131,13 +135,14 @@ void iterateArrayRangeBased(int arr[], int size)
  * -   Arrays of arrays. The most common is a 2D array (matrix).
  * -   Syntax: `dataType arrayName[rows][columns];`
  * -   Accessed using multiple subscript operators: `arrayName[rowIndex][columnIndex]`.
- * -   Stored in **row-major order** in memory (all elements of the first row, then all elements of the second row, etc.).
+ * -   Stored in **row-major order** in memory (all elements of the first row, then all elements of
+ * the second row, etc.).
  */
 
 // Example 4.1: Declaring and initializing a 2D array
 int matrix[2][3] = {
-    {1, 2, 3}, // Row 0
-    {4, 5, 6}  // Row 1
+    {1, 2, 3},  // Row 0
+    {4, 5, 6}   // Row 1
 };
 
 // Example 4.2: Accessing elements in a 2D array
@@ -145,7 +150,7 @@ int matrix[2][3] = {
 
 // Example 4.3: Iterating through a 2D array
 void printMatrix(int mat[][3], int rows)
-{ // Note: column size must be specified for 2D arrays in parameters
+{  // Note: column size must be specified for 2D arrays in parameters
     std::cout << "4.3 Matrix elements:" << std::endl;
     for (int i = 0; i < rows; ++i)
     {
@@ -164,15 +169,17 @@ void printMatrix(int mat[][3], int rows)
 /**
  * **5. Arrays and Functions:**
  * -   When an array is passed to a function, it **decays into a pointer** to its first element.
- * -   This means the function receives only the memory address of the first element, not the entire array.
+ * -   This means the function receives only the memory address of the first element, not the entire
+ * array.
  * -   Consequently, the function loses information about the array's size.
  * -   Therefore, it's crucial to **pass the array's size as a separate argument**.
- * -   Changes made to elements inside the function will affect the original array (pass by reference behavior).
+ * -   Changes made to elements inside the function will affect the original array (pass by
+ * reference behavior).
  */
 
 // Example 5.1: Passing a 1D array to a function
 void modifyArray(int arr[], int size)
-{ // 'arr' is actually 'int*'
+{  // 'arr' is actually 'int*'
     std::cout << "5.1 Inside modifyArray (before change): ";
     for (int i = 0; i < size; ++i)
     {
@@ -182,7 +189,7 @@ void modifyArray(int arr[], int size)
 
     if (size > 0)
     {
-        arr[0] = 99; // Modifies the original array
+        arr[0] = 99;  // Modifies the original array
     }
     std::cout << "5.1 Inside modifyArray (after change): ";
     for (int i = 0; i < size; ++i)
@@ -195,7 +202,7 @@ void modifyArray(int arr[], int size)
 // Example 5.2: Passing a 2D array to a function
 // For 2D arrays, all dimensions except the first must be specified in the parameter.
 void process2DArray(int arr[][3], int rows)
-{ // 'arr' is actually 'int (*)[3]'
+{  // 'arr' is actually 'int (*)[3]'
     std::cout << "5.2 Processing 2D array..." << std::endl;
     // You can iterate and access elements as usual
 }
@@ -220,19 +227,20 @@ void process2DArray(int arr[][3], int rows)
 // Example 6.1.1: std::array declaration and usage
 void useStdArray()
 {
-    std::array<int, 5> data = {1, 2, 3, 4, 5}; // Fixed size 5
+    std::array<int, 5> data = {1, 2, 3, 4, 5};  // Fixed size 5
     std::cout << "6.1.1 std::array elements: ";
     for (int x : data)
-    { // Range-based for loop works perfectly
+    {  // Range-based for loop works perfectly
         std::cout << x << " ";
     }
     std::cout << std::endl;
 
-    std::cout << "6.1.1 Element at index 2: " << data[2] << std::endl;                 // No bounds check
-    std::cout << "6.1.1 Element at index 4 (with .at()): " << data.at(4) << std::endl; // Bounds check
+    std::cout << "6.1.1 Element at index 2: " << data[2] << std::endl;  // No bounds check
+    std::cout << "6.1.1 Element at index 4 (with .at()): " << data.at(4)
+              << std::endl;  // Bounds check
     // data.at(5); // This would throw std::out_of_range exception at runtime
 
-    std::cout << "6.1.1 Size of std::array: " << data.size() << std::endl; // Get size
+    std::cout << "6.1.1 Size of std::array: " << data.size() << std::endl;  // Get size
 }
 
 /**
@@ -240,16 +248,18 @@ void useStdArray()
  * -   A dynamic-size array that can grow or shrink during runtime.
  * -   Manages its own memory allocation on the heap.
  * -   Provides automatic memory management (no manual `new`/`delete`).
- * -   Offers rich functionality: `push_back()`, `pop_back()`, `insert()`, `erase()`, `resize()`, etc.
- * -   Generally the preferred choice for most array-like needs in modern C++ due to its flexibility and safety.
+ * -   Offers rich functionality: `push_back()`, `pop_back()`, `insert()`, `erase()`, `resize()`,
+ * etc.
+ * -   Generally the preferred choice for most array-like needs in modern C++ due to its flexibility
+ * and safety.
  * -   Syntax: `std::vector<dataType> vectorName;`
  */
 
 // Example 6.2.1: std::vector declaration and usage
 void useStdVector()
 {
-    std::vector<double> temperatures; // Empty vector
-    temperatures.push_back(25.5);     // Add elements
+    std::vector<double> temperatures;  // Empty vector
+    temperatures.push_back(25.5);      // Add elements
     temperatures.push_back(28.0);
     temperatures.push_back(22.3);
 
@@ -260,9 +270,10 @@ void useStdVector()
     }
     std::cout << std::endl;
 
-    std::cout << "6.2.1 Current size of std::vector: " << temperatures.size() << std::endl; // Get current size
+    std::cout << "6.2.1 Current size of std::vector: " << temperatures.size()
+              << std::endl;  // Get current size
 
-    temperatures.pop_back(); // Remove last element
+    temperatures.pop_back();  // Remove last element
     std::cout << "6.2.1 After pop_back, size: " << temperatures.size() << std::endl;
 
     // Accessing elements (similar to arrays, .at() for bounds checking)
@@ -283,7 +294,8 @@ void useStdVector()
  *
  * 7.2. **Array Decay to Pointer:**
  * -   When passed to functions, arrays lose their size information. Always pass size explicitly.
- * -   `sizeof(arr)` inside a function receiving `arr[]` will give the size of the pointer, not the array.
+ * -   `sizeof(arr)` inside a function receiving `arr[]` will give the size of the pointer, not the
+ * array.
  *
  * 7.3. **Fixed Size:**
  * -   Cannot dynamically resize. If you need more space, you must create a new, larger array
@@ -297,8 +309,9 @@ void useStdVector()
 
 // Example 7.1: Array Decay
 void demonstrateArrayDecay(int arr[])
-{ // arr is actually int*
-    // std::cout << sizeof(arr) << std::endl; // This would print size of int* (e.g., 4 or 8 bytes), NOT array size
+{  // arr is actually int*
+   // std::cout << sizeof(arr) << std::endl; // This would print size of int* (e.g., 4 or 8 bytes),
+   // NOT array size
 }
 
 // =========================================================================
@@ -308,26 +321,24 @@ void demonstrateArrayDecay(int arr[])
 int main()
 {
     std::cout << "--- Section 2: Declaring and Initializing Arrays ---" << std::endl;
-    int scores[5]; // Uninitialized
+    int scores[5];  // Uninitialized
     std::cout << "2.1 Uninitialized scores (may show garbage): ";
-    for (int i = 0; i < 5; ++i)
-        std::cout << scores[i] << " ";
+    for (int i = 0; i < 5; ++i) std::cout << scores[i] << " ";
     std::cout << std::endl;
 
     int primeNumbers[5] = {2, 3, 5, 7, 11};
     std::cout << "2.2.1 Prime Numbers: ";
-    for (int i = 0; i < 5; ++i)
-        std::cout << primeNumbers[i] << " ";
+    for (int i = 0; i < 5; ++i) std::cout << primeNumbers[i] << " ";
     std::cout << std::endl;
 
     int partialScores[10] = {10, 20, 30};
     std::cout << "2.2.2 Partial Scores: ";
-    for (int i = 0; i < 10; ++i)
-        std::cout << partialScores[i] << " ";
+    for (int i = 0; i < 10; ++i) std::cout << partialScores[i] << " ";
     std::cout << std::endl;
 
     int inferredArray[] = {100, 200, 300, 400};
-    std::cout << "2.2.3 Inferred Array size: " << sizeof(inferredArray) / sizeof(inferredArray[0]) << std::endl;
+    std::cout << "2.2.3 Inferred Array size: " << sizeof(inferredArray) / sizeof(inferredArray[0])
+              << std::endl;
 
     char name[] = "C++";
     std::cout << "2.3.1 C-style string: " << name << std::endl;
@@ -336,7 +347,7 @@ int main()
     int myNumbers[4] = {10, 20, 30, 40};
     std::cout << "3.1 Original myNumbers: ";
     iterateArray(myNumbers, 4);
-    myNumbers[1] = 25; // Modify an element
+    myNumbers[1] = 25;  // Modify an element
     std::cout << "3.1 Modified myNumbers: ";
     iterateArray(myNumbers, 4);
 
@@ -349,26 +360,22 @@ int main()
     std::cout << std::endl;
 
     std::cout << "\n--- Section 4: Multidimensional Arrays ---" << std::endl;
-    int matrix[2][3] = {
-        {10, 20, 30},
-        {40, 50, 60}};
+    int matrix[2][3] = {{10, 20, 30}, {40, 50, 60}};
     printMatrix(matrix, 2);
-    std::cout << "4.2 Element matrix[1][2]: " << matrix[1][2] << std::endl; // Accesses 60
+    std::cout << "4.2 Element matrix[1][2]: " << matrix[1][2] << std::endl;  // Accesses 60
 
     std::cout << "\n--- Section 5: Arrays and Functions ---" << std::endl;
     int dataArray[] = {1, 2, 3, 4};
     std::cout << "5.1 Before modifyArray: ";
-    for (int x : dataArray)
-        std::cout << x << " ";
+    for (int x : dataArray) std::cout << x << " ";
     std::cout << std::endl;
     modifyArray(dataArray, 4);
     std::cout << "5.1 After modifyArray: ";
-    for (int x : dataArray)
-        std::cout << x << " "; // Shows 99 2 3 4
+    for (int x : dataArray) std::cout << x << " ";  // Shows 99 2 3 4
     std::cout << std::endl;
 
     int anotherMatrix[2][3] = {{1, 2, 3}, {7, 8, 9}};
-    process2DArray(anotherMatrix, 2); // Pass 2D array
+    process2DArray(anotherMatrix, 2);  // Pass 2D array
 
     std::cout << "\n--- Section 6: Modern C++ Array Alternatives ---" << std::endl;
     useStdArray();
@@ -376,7 +383,7 @@ int main()
 
     std::cout << "\n--- Section 7: Common Pitfalls with C-style Arrays ---" << std::endl;
     int decayTestArray[5] = {1, 2, 3, 4, 5};
-    demonstrateArrayDecay(decayTestArray); // No direct output, just to show the concept
+    demonstrateArrayDecay(decayTestArray);  // No direct output, just to show the concept
 
     // Attempting to copy C-style arrays directly (will not compile)
     // int arrA[3] = {1,2,3};

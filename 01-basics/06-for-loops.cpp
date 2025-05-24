@@ -10,7 +10,7 @@
 
 // Include necessary headers for input/output operations.
 #include <iostream>
-#include <vector> // Required for std::vector, used in range-based for loop example
+#include <vector>  // Required for std::vector, used in range-based for loop example
 
 // The 'main' function is the entry point of the program.
 // Program execution begins here.
@@ -29,13 +29,14 @@ int main()
     {
         std::cout << "Loop iteration (i): " << i << std::endl;
     }
-    std::cout << "Loop finished. (i is now out of scope or last value: 5 if declared outside)" << std::endl;
+    std::cout << "Loop finished. (i is now out of scope or last value: 5 if declared outside)"
+              << std::endl;
     // Note: 'i' is typically scoped to the loop itself (C++11 onwards).
 
     std::cout << "\n--- 2. for Loop (Counting Down) ---" << std::endl;
     // The loop can also count downwards.
     for (int j = 10; j > 0; j -= 2)
-    { // Start at 10, loop while > 0, decrement by 2
+    {  // Start at 10, loop while > 0, decrement by 2
         std::cout << "Countdown (j): " << j << std::endl;
     }
 
@@ -51,36 +52,36 @@ int main()
     int sum = 0;
     for (int num = 1; num <= 10; num++)
     {
-        sum += num; // Add current 'num' to 'sum'
+        sum += num;  // Add current 'num' to 'sum'
     }
-    std::cout << "Sum of numbers from 1 to 10: " << sum << std::endl; // Expected: 55
+    std::cout << "Sum of numbers from 1 to 10: " << sum << std::endl;  // Expected: 55
 
     std::cout << "\n--- 5. Nested for Loops (Multiplication Table) ---" << std::endl;
     // Loops can be nested inside each other.
     // The inner loop completes all its iterations for each single iteration of the outer loop.
     std::cout << "Simple Multiplication Table (1-3):" << std::endl;
     for (int i = 1; i <= 3; i++)
-    { // Outer loop (rows)
+    {  // Outer loop (rows)
         for (int j = 1; j <= 3; j++)
-        {                                                             // Inner loop (columns)
-            std::cout << i << " * " << j << " = " << (i * j) << "\t"; // '\t' for tab spacing
+        {                                                              // Inner loop (columns)
+            std::cout << i << " * " << j << " = " << (i * j) << "\t";  // '\t' for tab spacing
         }
-        std::cout << std::endl; // New line after each row
+        std::cout << std::endl;  // New line after each row
     }
 
     std::cout << "\n--- 6. Range-based for Loop (C++11 and later) ---" << std::endl;
     // This is a convenient way to iterate over elements of a range (like arrays, vectors).
     // Syntax: for (declaration : range) { loop_body }
-    std::vector<int> numbers = {10, 20, 30, 40, 50}; // std::vector is a dynamic array
+    std::vector<int> numbers = {10, 20, 30, 40, 50};  // std::vector is a dynamic array
     std::cout << "Iterating over a vector using range-based for loop:" << std::endl;
     for (int n : numbers)
-    { // 'n' will take on the value of each element in 'numbers'
+    {  // 'n' will take on the value of each element in 'numbers'
         std::cout << n << " ";
     }
     std::cout << std::endl;
 
     std::cout << "Iterating over a C-style array:" << std::endl;
-    int scores[] = {85, 92, 78, 95}; // C-style array
+    int scores[] = {85, 92, 78, 95};  // C-style array
     // Note: You cannot directly use range-based for loop on a pointer to an array
     // if the size is not known at compile time. Here, 'scores' is an array, so it works.
     for (int s : scores)
@@ -97,9 +98,9 @@ int main()
     // Example 1: Initialization outside, condition and increment inside
     int count = 0;
     for (; count < 3;)
-    { // No init, no increment
+    {  // No init, no increment
         std::cout << "Count: " << count << std::endl;
-        count++; // Increment inside the loop body
+        count++;  // Increment inside the loop body
     }
 
     // Example 2: "Infinite" loop (will keep running until explicitly stopped, e.g., Ctrl+C)
