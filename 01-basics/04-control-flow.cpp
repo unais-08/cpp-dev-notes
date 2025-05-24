@@ -17,13 +17,13 @@ int main()
 {
     int score = 75;
     int temperature = 28;
-    int hour = 10; // Using 24-hour format
+    int hour = 10;  // Using 24-hour format
 
     std::cout << "--- 1. Simple if Statement ---" << std::endl;
     // An 'if' statement executes a block of code if its condition is true.
     // The condition is an expression that evaluates to a boolean value (true or false).
     if (score >= 60)
-    { // Condition: Is score greater than or equal to 60?
+    {  // Condition: Is score greater than or equal to 60?
         std::cout << "Congratulations! You passed the exam." << std::endl;
     }
     std::cout << "End of simple if statement example." << std::endl;
@@ -34,11 +34,11 @@ int main()
     std::cout << "\n--- 2. if-else Statement ---" << std::endl;
     int number = 7;
     if (number % 2 == 0)
-    { // Condition: Is number divisible by 2 (even)?
+    {  // Condition: Is number divisible by 2 (even)?
         std::cout << number << " is an even number." << std::endl;
     }
     else
-    { // This block executes if the 'if' condition is false.
+    {  // This block executes if the 'if' condition is false.
         std::cout << number << " is an odd number." << std::endl;
     }
 
@@ -64,11 +64,11 @@ int main()
         std::cout << "Your grade is A." << std::endl;
     }
     else if (score >= 80)
-    { // This is checked ONLY if the first 'if' was false.
+    {  // This is checked ONLY if the first 'if' was false.
         std::cout << "Your grade is B." << std::endl;
     }
     else if (score >= 70)
-    { // This is checked ONLY if the previous 'else if' was false.
+    {  // This is checked ONLY if the previous 'else if' was false.
         std::cout << "Your grade is C." << std::endl;
     }
     else if (score >= 60)
@@ -76,7 +76,7 @@ int main()
         std::cout << "Your grade is D." << std::endl;
     }
     else
-    { // This is the default case if none of the above conditions are met.
+    {  // This is the default case if none of the above conditions are met.
         std::cout << "Your grade is F." << std::endl;
     }
 
@@ -84,19 +84,19 @@ int main()
     std::cout << "\n--- 4. if-else if-else (Time of Day) ---" << std::endl;
 
     if (hour >= 5 && hour < 12)
-    { // 5 AM to 11:59 AM
+    {  // 5 AM to 11:59 AM
         std::cout << "Good Morning!" << std::endl;
     }
     else if (hour >= 12 && hour < 18)
-    { // 12 PM to 5:59 PM
+    {  // 12 PM to 5:59 PM
         std::cout << "Good Afternoon!" << std::endl;
     }
     else if (hour >= 18 && hour < 22)
-    { // 6 PM to 9:59 PM
+    {  // 6 PM to 9:59 PM
         std::cout << "Good Evening!" << std::endl;
     }
     else
-    { // 10 PM to 4:59 AM (or invalid hour)
+    {  // 10 PM to 4:59 AM (or invalid hour)
         std::cout << "Good Night!" << std::endl;
     }
 
@@ -104,7 +104,8 @@ int main()
     std::cout << "\n--- 5. Omitting Braces for Single Statements ---" << std::endl;
     int value = 5;
     if (value > 3)
-        std::cout << "Value is greater than 3 (no braces)." << std::endl; // Single statement, no braces needed
+        std::cout << "Value is greater than 3 (no braces)."
+                  << std::endl;  // Single statement, no braces needed
     else
         std::cout << "Value is not greater than 3 (no braces)." << std::endl;
 

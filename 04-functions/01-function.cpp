@@ -5,9 +5,9 @@
  * scope, inline functions, and an introduction to recursion and function pointers.
  */
 
-#include <iostream> // Required for input/output operations (e.g., std::cout)
-#include <string>   // Required for using std::string
-#include <vector>   // Required for using std::vector
+#include <iostream>  // Required for input/output operations (e.g., std::cout)
+#include <string>    // Required for using std::string
+#include <vector>    // Required for using std::vector
 
 // =========================================================================
 // 1. Introduction: What are Functions?
@@ -53,11 +53,11 @@
  */
 
 // Example 2.1: Function Declaration (Prototype)
-int addNumbers(int a, int b); // Declares the function 'addNumbers'
+int addNumbers(int a, int b);  // Declares the function 'addNumbers'
 
 // Example 2.2: Function Definition (for a function called before its definition)
-void greetUser(const std::string &name)
-{ // Definition of greetUser
+void greetUser(const std::string& name)
+{  // Definition of greetUser
     std::cout << "2.2 Hello, " << name << "!" << std::endl;
 }
 
@@ -78,7 +78,7 @@ void greetUser(const std::string &name)
 // Example 3.1.1: Pass by Value
 void incrementByValue(int num)
 {
-    num++; // 'num' is a copy, original variable outside is not affected
+    num++;  // 'num' is a copy, original variable outside is not affected
     std::cout << "3.1.1 Inside incrementByValue: " << num << std::endl;
 }
 
@@ -90,21 +90,22 @@ void incrementByValue(int num)
  */
 
 // Example 3.2.1: Pass by Reference
-void incrementByReference(int &num)
+void incrementByReference(int& num)
 {
-    num++; // 'num' is a reference, original variable outside IS affected
+    num++;  // 'num' is a reference, original variable outside IS affected
     std::cout << "3.2.1 Inside incrementByReference: " << num << std::endl;
 }
 
 /**
  * **3.3. Pass by Constant Reference (`const &`):**
- * -   The function receives a reference to the original argument, but it cannot modify the argument.
+ * -   The function receives a reference to the original argument, but it cannot modify the
+ * argument.
  * -   Used for passing large objects efficiently without copying, while ensuring data integrity.
  * -   Combines efficiency of pass-by-reference with safety of pass-by-value.
  */
 
 // Example 3.3.1: Pass by Constant Reference
-void printStringLength(const std::string &str)
+void printStringLength(const std::string& str)
 {
     // str[0] = 'X'; // This would cause a compilation error: cannot modify a const reference
     std::cout << "3.3.1 Length of string: " << str.length() << std::endl;
@@ -126,18 +127,18 @@ void printStringLength(const std::string &str)
 // Example 4.1: Function returning an int
 int multiply(int a, int b)
 {
-    return a * b; // Returns the product of a and b
+    return a * b;  // Returns the product of a and b
 }
 
 // Example 4.2: Function returning void
-void printMessage(const std::string &msg)
+void printMessage(const std::string& msg)
 {
     std::cout << "4.2 Message: " << msg << std::endl;
     // No return statement needed for void functions, or 'return;' can be used.
 }
 
 // Example 4.3: Function returning a reference (advanced, use with care)
-int &getLargest(int &x, int &y)
+int& getLargest(int& x, int& y)
 {
     return (x > y) ? x : y;
 }
@@ -149,7 +150,8 @@ int &getLargest(int &x, int &y)
 /**
  * **Function Overloading:**
  * -   Allows you to define multiple functions with the **same name** but different
- * parameter lists (different number of parameters, different types of parameters, or different order of parameters).
+ * parameter lists (different number of parameters, different types of parameters, or different
+ * order of parameters).
  * -   The compiler determines which overloaded function to call based on the arguments
  * provided during the function call.
  * -   Return type alone is NOT sufficient to overload a function.
@@ -168,7 +170,7 @@ double operate(double a, double b)
     return a * b;
 }
 
-std::string operate(const std::string &s1, const std::string &s2)
+std::string operate(const std::string& s1, const std::string& s2)
 {
     std::cout << "5.1 Calling string operate(string, string)" << std::endl;
     return s1 + s2;
@@ -194,11 +196,12 @@ void print(int val1, int val2)
  * -   Allow you to specify a default value for a function parameter.
  * -   If the caller doesn't provide an argument for that parameter, the default value is used.
  * -   Default arguments must be placed at the **end** of the parameter list.
- * -   They should only be specified in the **function declaration (prototype)**, not in the definition.
+ * -   They should only be specified in the **function declaration (prototype)**, not in the
+ * definition.
  */
 
 // Example 6.1: Function with default arguments
-void displayVolume(double length, double width = 1.0, double height = 1.0); // Declaration only
+void displayVolume(double length, double width = 1.0, double height = 1.0);  // Declaration only
 
 // =========================================================================
 // 7. Scope of Variables within Functions
@@ -220,12 +223,13 @@ void displayVolume(double length, double width = 1.0, double height = 1.0); // D
  */
 
 // Example 7.1: Local and Global Variables
-int globalVar = 100; // Global variable
+int globalVar = 100;  // Global variable
 
 void functionScopeExample()
 {
-    int localVar = 50; // Local variable
-    std::cout << "7.1 Inside function: globalVar = " << globalVar << ", localVar = " << localVar << std::endl;
+    int localVar = 50;  // Local variable
+    std::cout << "7.1 Inside function: globalVar = " << globalVar << ", localVar = " << localVar
+              << std::endl;
     // std::cout << otherVar << std::endl; // Error: otherVar is not in scope
 }
 
@@ -265,12 +269,12 @@ inline int square(int x)
 long long factorial(int n)
 {
     if (n == 0 || n == 1)
-    { // Base case
+    {  // Base case
         return 1;
     }
     else
     {
-        return n * factorial(n - 1); // Recursive call
+        return n * factorial(n - 1);  // Recursive call
     }
 }
 
@@ -308,21 +312,21 @@ int main()
 {
     // --- Demonstrating Section 2: Function Declaration & Definition ---
     std::cout << "--- Section 2: Function Declaration & Definition ---" << std::endl;
-    greetUser("Alice");         // Call to defined function
-    int sum = addNumbers(5, 7); // Call to declared function
+    greetUser("Alice");          // Call to defined function
+    int sum = addNumbers(5, 7);  // Call to declared function
     std::cout << "2.1 Sum of 5 and 7: " << sum << std::endl;
 
     // --- Demonstrating Section 3: Function Parameters ---
     std::cout << "\n--- Section 3: Function Parameters ---" << std::endl;
     int val = 10;
-    std::cout << "3.1.1 Before incrementByValue: " << val << std::endl; // 10
+    std::cout << "3.1.1 Before incrementByValue: " << val << std::endl;  // 10
     incrementByValue(val);
-    std::cout << "3.1.1 After incrementByValue: " << val << std::endl; // Still 10
+    std::cout << "3.1.1 After incrementByValue: " << val << std::endl;  // Still 10
 
     int refVal = 20;
-    std::cout << "3.2.1 Before incrementByReference: " << refVal << std::endl; // 20
+    std::cout << "3.2.1 Before incrementByReference: " << refVal << std::endl;  // 20
     incrementByReference(refVal);
-    std::cout << "3.2.1 After incrementByReference: " << refVal << std::endl; // 21
+    std::cout << "3.2.1 After incrementByReference: " << refVal << std::endl;  // 21
 
     std::string myStr = "C++ Programming";
     printStringLength(myStr);
@@ -330,14 +334,14 @@ int main()
     // --- Demonstrating Section 4: Return Types ---
     std::cout << "\n--- Section 4: Return Types ---" << std::endl;
     int product = multiply(8, 4);
-    std::cout << "4.1 Product of 8 and 4: " << product << std::endl; // 32
+    std::cout << "4.1 Product of 8 and 4: " << product << std::endl;  // 32
     printMessage("Hello from printMessage!");
 
     int a = 10, b = 20;
-    int &largest = getLargest(a, b);                                      // largest is now a reference to 'b'
-    std::cout << "4.3 Largest of 10 and 20: " << largest << std::endl;    // 20
-    largest = 25;                                                         // Modifies 'b' because 'largest' is a reference
-    std::cout << "4.3 After modifying largest, b is: " << b << std::endl; // 25
+    int& largest = getLargest(a, b);  // largest is now a reference to 'b'
+    std::cout << "4.3 Largest of 10 and 20: " << largest << std::endl;  // 20
+    largest = 25;  // Modifies 'b' because 'largest' is a reference
+    std::cout << "4.3 After modifying largest, b is: " << b << std::endl;  // 25
 
     // --- Demonstrating Section 5: Function Overloading ---
     std::cout << "\n--- Section 5: Function Overloading ---" << std::endl;
@@ -349,9 +353,9 @@ int main()
 
     // --- Demonstrating Section 6: Default Arguments ---
     std::cout << "\n--- Section 6: Default Arguments ---" << std::endl;
-    displayVolume(5.0);           // Uses default width=1.0, height=1.0
-    displayVolume(5.0, 2.0);      // Uses default height=1.0
-    displayVolume(5.0, 2.0, 3.0); // All arguments provided
+    displayVolume(5.0);            // Uses default width=1.0, height=1.0
+    displayVolume(5.0, 2.0);       // Uses default height=1.0
+    displayVolume(5.0, 2.0, 3.0);  // All arguments provided
 
     // --- Demonstrating Section 7: Scope of Variables ---
     std::cout << "\n--- Section 7: Scope of Variables ---" << std::endl;
@@ -362,18 +366,18 @@ int main()
     // --- Demonstrating Section 8: Inline Functions ---
     std::cout << "\n--- Section 8: Inline Functions ---" << std::endl;
     int s = square(7);
-    std::cout << "8.1 Square of 7: " << s << std::endl; // 49
+    std::cout << "8.1 Square of 7: " << s << std::endl;  // 49
 
     // --- Demonstrating Section 9: Recursion ---
     std::cout << "\n--- Section 9: Recursion ---" << std::endl;
-    std::cout << "9.1 Factorial of 5: " << factorial(5) << std::endl; // 120
+    std::cout << "9.1 Factorial of 5: " << factorial(5) << std::endl;  // 120
 
     // --- Demonstrating Section 10: Pointers to Functions ---
     std::cout << "\n--- Section 10: Pointers to Functions ---" << std::endl;
-    performOperation(30, 10, subtractNumbers); // Pass subtractNumbers function
-    performOperation(5, 7, addNumbers);        // Pass addNumbers function
+    performOperation(30, 10, subtractNumbers);  // Pass subtractNumbers function
+    performOperation(5, 7, addNumbers);         // Pass addNumbers function
 
-    return 0; // Indicate successful program execution
+    return 0;  // Indicate successful program execution
 }
 
 // =========================================================================

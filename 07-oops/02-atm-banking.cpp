@@ -4,23 +4,22 @@
 
 class Bank_Account
 {
-public:
-    static constexpr const char *bank_name = "State Bank of C++";
+   public:
+    static constexpr const char* bank_name = "State Bank of C++";
 
-private:
+   private:
     const int account_no;
     double current_balance;
 
-public:
+   public:
     Bank_Account(int account_no, double initial_balance)
-        : account_no(account_no), current_balance(initial_balance > 0 ? initial_balance : 0.0) {}
+        : account_no(account_no), current_balance(initial_balance > 0 ? initial_balance : 0.0)
+    {
+    }
 
     int get_account_no() const { return account_no; }
 
-    void print_balance() const
-    {
-        std::cout << "Balance: $" << current_balance << '\n';
-    }
+    void print_balance() const { std::cout << "Balance: $" << current_balance << '\n'; }
 
     bool withdraw(double amount)
     {
@@ -53,7 +52,7 @@ public:
         return true;
     }
 
-    bool send_money(Bank_Account &recipient, double amount)
+    bool send_money(Bank_Account& recipient, double amount)
     {
         if (this == &recipient)
         {
@@ -63,7 +62,8 @@ public:
         if (withdraw(amount))
         {
             recipient.deposit(amount);
-            std::cout << "Sent $" << amount << " to account #" << recipient.get_account_no() << '\n';
+            std::cout << "Sent $" << amount << " to account #" << recipient.get_account_no()
+                      << '\n';
             return true;
         }
         return false;
@@ -76,7 +76,7 @@ void clear_input()
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
-double get_positive_amount(const std::string &prompt)
+double get_positive_amount(const std::string& prompt)
 {
     double amount;
     while (true)
@@ -100,7 +100,7 @@ int main()
 {
     std::string username = "Shaikh";
     auto user_account = std::make_unique<Bank_Account>(759654, 100.0);
-    auto friend_account = std::make_unique<Bank_Account>(123456, 50.0); // Example recipient
+    auto friend_account = std::make_unique<Bank_Account>(123456, 50.0);  // Example recipient
 
     std::cout << "Welcome to " << Bank_Account::bank_name << " ATM, " << username << '\n';
 
@@ -120,33 +120,34 @@ int main()
 
         switch (choice)
         {
-        case 1:
-            user_account->print_balance();
-            break;
-        case 2:
-        {
-            double amount = get_positive_amount("Enter amount to withdraw: ");
-            user_account->withdraw(amount);
-            break;
-        }
-        case 3:
-        {
-            double amount = get_positive_amount("Enter amount to deposit: ");
-            user_account->deposit(amount);
-            break;
-        }
-        case 4:
-        {
-            std::cout << "Sending to friend account #" << friend_account->get_account_no() << '\n';
-            double amount = get_positive_amount("Enter amount to send: ");
-            user_account->send_money(*friend_account, amount);
-            break;
-        }
-        case 5:
-            std::cout << "Thank you for using our ATM. Goodbye!\n";
-            return 0;
-        default:
-            std::cout << "Invalid choice. Please try again.\n";
+            case 1:
+                user_account->print_balance();
+                break;
+            case 2:
+            {
+                double amount = get_positive_amount("Enter amount to withdraw: ");
+                user_account->withdraw(amount);
+                break;
+            }
+            case 3:
+            {
+                double amount = get_positive_amount("Enter amount to deposit: ");
+                user_account->deposit(amount);
+                break;
+            }
+            case 4:
+            {
+                std::cout << "Sending to friend account #" << friend_account->get_account_no()
+                          << '\n';
+                double amount = get_positive_amount("Enter amount to send: ");
+                user_account->send_money(*friend_account, amount);
+                break;
+            }
+            case 5:
+                std::cout << "Thank you for using our ATM. Goodbye!\n";
+                return 0;
+            default:
+                std::cout << "Invalid choice. Please try again.\n";
         }
     }
 }

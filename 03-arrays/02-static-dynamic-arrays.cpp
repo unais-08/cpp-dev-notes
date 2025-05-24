@@ -6,10 +6,10 @@
  * Date: 2025-05-23
  */
 
-#include <iostream> // For std::cout, std::endl
-#include <vector>   // For std::vector (dynamic array in C++)
-#include <array>    // For std::array (fixed-size array wrapper in C++11)
-#include <memory>   // For std::unique_ptr, std::shared_ptr (smart pointers for dynamic memory)
+#include <iostream>  // For std::cout, std::endl
+#include <vector>    // For std::vector (dynamic array in C++)
+#include <array>     // For std::array (fixed-size array wrapper in C++11)
+#include <memory>    // For std::unique_ptr, std::shared_ptr (smart pointers for dynamic memory)
 
 // =========================================================================
 // 1. Introduction: Static vs. Dynamic Memory Allocation
@@ -18,9 +18,15 @@
 /**
  * **1. Introduction: Static vs. Dynamic Memory Allocation**
  * -   In C++, memory for variables and data structures can be allocated in two primary ways:
- * -   **Static Memory Allocation (Stack):** Memory is allocated at compile time. Its size is fixed and known before the program runs. This includes global variables, static variables, and local variables (including fixed-size arrays) within functions. Memory is automatically managed (allocated when scope is entered, deallocated when scope is exited).
- * -   **Dynamic Memory Allocation (Heap):** Memory is allocated at runtime. Its size can be determined or changed during program execution. This memory must be explicitly managed by the programmer (allocated with `new`, deallocated with `delete`).
- * -   The distinction between static and dynamic arrays directly relates to where and when their memory is allocated.
+ * -   **Static Memory Allocation (Stack):** Memory is allocated at compile time. Its size is fixed
+ * and known before the program runs. This includes global variables, static variables, and local
+ * variables (including fixed-size arrays) within functions. Memory is automatically managed
+ * (allocated when scope is entered, deallocated when scope is exited).
+ * -   **Dynamic Memory Allocation (Heap):** Memory is allocated at runtime. Its size can be
+ * determined or changed during program execution. This memory must be explicitly managed by the
+ * programmer (allocated with `new`, deallocated with `delete`).
+ * -   The distinction between static and dynamic arrays directly relates to where and when their
+ * memory is allocated.
  */
 
 // =========================================================================
@@ -38,10 +44,14 @@
 /**
  * **2.1. Characteristics:**
  * -   **Fixed Size:** Size must be a constant integer expression. Cannot be changed at runtime.
- * -   **Compile-Time Allocation:** Memory is set aside when the program is compiled or when the function containing it is called (on the stack).
- * -   **Automatic Memory Management:** Memory is automatically deallocated when the array goes out of scope (e.g., when the function returns).
- * -   **No Bounds Checking:** C++ does not perform runtime bounds checking for C-style arrays, leading to undefined behavior if you access out-of-bounds indices.
- * -   **Array Decay:** When passed to functions, they decay into a pointer to their first element, losing size information.
+ * -   **Compile-Time Allocation:** Memory is set aside when the program is compiled or when the
+ * function containing it is called (on the stack).
+ * -   **Automatic Memory Management:** Memory is automatically deallocated when the array goes out
+ * of scope (e.g., when the function returns).
+ * -   **No Bounds Checking:** C++ does not perform runtime bounds checking for C-style arrays,
+ * leading to undefined behavior if you access out-of-bounds indices.
+ * -   **Array Decay:** When passed to functions, they decay into a pointer to their first element,
+ * losing size information.
  */
 
 // Example 2.1.1: Static array declaration and usage
@@ -49,7 +59,7 @@ void staticArrayExample()
 {
     // Size must be a compile-time constant
     const int MAX_STUDENTS = 5;
-    int studentScores[MAX_STUDENTS]; // Array of 5 integers on the stack
+    int studentScores[MAX_STUDENTS];  // Array of 5 integers on the stack
 
     // Initialize elements
     for (int i = 0; i < MAX_STUDENTS; ++i)
@@ -70,10 +80,9 @@ void staticArrayExample()
 // Example 2.1.2: Multidimensional static array
 void static2DArrayExample()
 {
-    int matrix[2][3] = {
-        {10, 20, 30},
-        {40, 50, 60}};
-    std::cout << "2.1.2 Static 2D Array Element [0][1]: " << matrix[0][1] << std::endl; // Accesses 20
+    int matrix[2][3] = {{10, 20, 30}, {40, 50, 60}};
+    std::cout << "2.1.2 Static 2D Array Element [0][1]: " << matrix[0][1]
+              << std::endl;  // Accesses 20
 }
 
 /**
@@ -93,15 +102,16 @@ void static2DArrayExample()
  * -   These arrays have a size that can be determined or changed during program execution.
  * -   Their memory is allocated on the **heap** (also known as "free store").
  * -   Requires explicit memory management (allocation and deallocation).
- * -   Modern C++ strongly prefers `std::vector` for dynamic arrays due to its safety and automatic memory management.
+ * -   Modern C++ strongly prefers `std::vector` for dynamic arrays due to its safety and automatic
+ * memory management.
  */
 
 /**
  * **3.1. C-style Dynamic Arrays (`new` and `delete`)**
  * -   Allocated using the `new` operator and deallocated using the `delete[]` operator.
  * -   `new dataType[size]` returns a pointer to the first element of the allocated memory block.
- * -   **Crucial:** You *must* use `delete[]` to free the allocated memory when it's no longer needed,
- * to prevent **memory leaks**.
+ * -   **Crucial:** You *must* use `delete[]` to free the allocated memory when it's no longer
+ * needed, to prevent **memory leaks**.
  */
 
 /**
@@ -122,19 +132,19 @@ void cStyleDynamicArrayExample(int size)
         return;
     }
 
-    int *dynamicArray = new int[size]; // Allocate memory for 'size' integers on the heap
+    int* dynamicArray = new int[size];  // Allocate memory for 'size' integers on the heap
 
     std::cout << "3.1.1 C-style Dynamic Array (size " << size << ") elements: ";
     for (int i = 0; i < size; ++i)
     {
-        dynamicArray[i] = i * 100; // Initialize elements
+        dynamicArray[i] = i * 100;  // Initialize elements
         std::cout << dynamicArray[i] << " ";
     }
     std::cout << std::endl;
 
     // IMPORTANT: Deallocate memory when done to prevent memory leaks
     delete[] dynamicArray;
-    dynamicArray = nullptr; // Good practice to set pointer to nullptr after deletion
+    dynamicArray = nullptr;  // Good practice to set pointer to nullptr after deletion
     std::cout << "3.1.1 C-style Dynamic Array memory deallocated." << std::endl;
 }
 
@@ -148,10 +158,10 @@ void cStyleDynamic2DArrayExample(int rows, int cols)
     }
 
     // Allocate array of pointers (each pointer will point to a row)
-    int **dynamicMatrix = new int *[rows];
+    int** dynamicMatrix = new int*[rows];
     for (int i = 0; i < rows; ++i)
     {
-        dynamicMatrix[i] = new int[cols]; // Allocate each row
+        dynamicMatrix[i] = new int[cols];  // Allocate each row
     }
 
     std::cout << "3.1.2 Dynamic 2D Array elements (initialized):" << std::endl;
@@ -168,9 +178,9 @@ void cStyleDynamic2DArrayExample(int rows, int cols)
     // IMPORTANT: Deallocate memory in reverse order of allocation
     for (int i = 0; i < rows; ++i)
     {
-        delete[] dynamicMatrix[i]; // Delete each row
+        delete[] dynamicMatrix[i];  // Delete each row
     }
-    delete[] dynamicMatrix; // Delete the array of pointers
+    delete[] dynamicMatrix;  // Delete the array of pointers
     dynamicMatrix = nullptr;
     std::cout << "3.1.2 Dynamic 2D Array memory deallocated." << std::endl;
 }
@@ -190,26 +200,32 @@ void cStyleDynamic2DArrayExample(int rows, int cols)
  * **3.2.1. Characteristics of `std::vector`:**
  * -   **Dynamic Size:** Can grow or shrink at runtime.
  * -   **Heap Allocation:** Memory for elements is on the heap, managed by `std::vector`.
- * -   **Automatic Memory Management:** No `new`/`delete` needed. Resource Acquisition Is Initialization (RAII) principle.
- * -   **Bounds Checking:** `.at()` provides bounds checking (throws `std::out_of_range`). `[]` operator does not.
- * -   **Rich API:** `push_back()`, `pop_back()`, `insert()`, `erase()`, `resize()`, `clear()`, `size()`, `capacity()`, etc.
- * -   **Contiguous Storage:** Elements are still stored contiguously in memory, allowing efficient random access.
+ * -   **Automatic Memory Management:** No `new`/`delete` needed. Resource Acquisition Is
+ * Initialization (RAII) principle.
+ * -   **Bounds Checking:** `.at()` provides bounds checking (throws `std::out_of_range`). `[]`
+ * operator does not.
+ * -   **Rich API:** `push_back()`, `pop_back()`, `insert()`, `erase()`, `resize()`, `clear()`,
+ * `size()`, `capacity()`, etc.
+ * -   **Contiguous Storage:** Elements are still stored contiguously in memory, allowing efficient
+ * random access.
  */
 
 // Example 3.2.1: std::vector usage
 void stdVectorExample()
 {
-    std::vector<int> numbers; // Creates an empty vector of integers
-    std::cout << "3.2.1 Initial vector size: " << numbers.size() << ", capacity: " << numbers.capacity() << std::endl;
+    std::vector<int> numbers;  // Creates an empty vector of integers
+    std::cout << "3.2.1 Initial vector size: " << numbers.size()
+              << ", capacity: " << numbers.capacity() << std::endl;
 
-    numbers.push_back(10); // Add elements
+    numbers.push_back(10);  // Add elements
     numbers.push_back(20);
     numbers.push_back(30);
-    std::cout << "3.2.1 After push_back, size: " << numbers.size() << ", capacity: " << numbers.capacity() << std::endl;
+    std::cout << "3.2.1 After push_back, size: " << numbers.size()
+              << ", capacity: " << numbers.capacity() << std::endl;
 
     std::cout << "3.2.1 Vector elements: ";
     for (int n : numbers)
-    { // Range-based for loop works seamlessly
+    {  // Range-based for loop works seamlessly
         std::cout << n << " ";
     }
     std::cout << std::endl;
@@ -219,11 +235,13 @@ void stdVectorExample()
 
     // numbers.at(3); // This would throw std::out_of_range exception
 
-    numbers.pop_back(); // Remove last element
-    std::cout << "3.2.1 After pop_back, size: " << numbers.size() << ", capacity: " << numbers.capacity() << std::endl;
+    numbers.pop_back();  // Remove last element
+    std::cout << "3.2.1 After pop_back, size: " << numbers.size()
+              << ", capacity: " << numbers.capacity() << std::endl;
 
-    numbers.clear(); // Remove all elements
-    std::cout << "3.2.1 After clear, size: " << numbers.size() << ", capacity: " << numbers.capacity() << std::endl;
+    numbers.clear();  // Remove all elements
+    std::cout << "3.2.1 After clear, size: " << numbers.size()
+              << ", capacity: " << numbers.capacity() << std::endl;
 }
 
 // Example 3.2.2: std::vector of vectors (for 2D dynamic arrays)
@@ -238,7 +256,7 @@ void stdVector2DExample()
     matrix[2][3] = 9;
 
     std::cout << "3.2.2 std::vector 2D elements:" << std::endl;
-    for (const auto &row : matrix)
+    for (const auto& row : matrix)
     {
         for (int val : row)
         {
@@ -248,9 +266,9 @@ void stdVector2DExample()
     }
 
     // You can resize rows or add new rows dynamically
-    matrix.push_back(std::vector<int>(2, 100)); // Add a new row of size 2
+    matrix.push_back(std::vector<int>(2, 100));  // Add a new row of size 2
     std::cout << "3.2.2 After adding a row, new matrix:" << std::endl;
-    for (const auto &row : matrix)
+    for (const auto& row : matrix)
     {
         for (int val : row)
         {
@@ -262,16 +280,19 @@ void stdVector2DExample()
 
 /**
  * **3.3. When to Use Dynamic Arrays (`std::vector`):**
- * -   When the size of the collection is not known at compile time or needs to change during runtime.
+ * -   When the size of the collection is not known at compile time or needs to change during
+ * runtime.
  * -   For almost all general-purpose array-like needs in modern C++.
  * -   When you want automatic memory management and a rich set of utility functions.
- * -   When you need to pass arrays to functions without explicit size arguments (as `std::vector` carries its size).
+ * -   When you need to pass arrays to functions without explicit size arguments (as `std::vector`
+ * carries its size).
  *
  * **When to Use C-style Dynamic Arrays (`new`/`delete`):**
  * -   Rarely in modern C++ applications, unless:
  * -   You are working with legacy C code or APIs that require raw pointers.
  * -   You are implementing custom memory allocators or low-level data structures.
- * -   You are writing performance-critical code where very fine-grained memory control is absolutely necessary (though `std::vector` is highly optimized).
+ * -   You are writing performance-critical code where very fine-grained memory control is
+ * absolutely necessary (though `std::vector` is highly optimized).
  * -   You are learning about manual memory management for educational purposes.
  */
 
@@ -292,7 +313,8 @@ void stdVector2DExample()
  * -   **Fixed Size:** Size must be a compile-time constant. Cannot be changed at runtime.
  * -   **Stack Allocation:** Memory is typically on the stack.
  * -   **Automatic Memory Management:** No `new`/`delete` needed.
- * -   **Bounds Checking:** Provides `.at()` for bounds-checked access (throws `std::out_of_range`). `[]` operator does not.
+ * -   **Bounds Checking:** Provides `.at()` for bounds-checked access (throws `std::out_of_range`).
+ * `[]` operator does not.
  * -   **Container Features:** Supports iterators, `size()`, `empty()`, `fill()`, etc.
  * -   **Can be copied and assigned:** Unlike raw C-style arrays.
  */
@@ -300,7 +322,7 @@ void stdVector2DExample()
 // Example 4.1.1: std::array usage
 void stdArrayFixedExample()
 {
-    std::array<int, 4> values = {10, 20, 30, 40}; // Fixed size 4
+    std::array<int, 4> values = {10, 20, 30, 40};  // Fixed size 4
     std::cout << "4.1.1 std::array elements: ";
     for (int val : values)
     {
@@ -309,10 +331,10 @@ void stdArrayFixedExample()
     std::cout << std::endl;
 
     std::cout << "4.1.1 Size: " << values.size() << std::endl;
-    std::cout << "4.1.1 Element at index 2: " << values.at(2) << std::endl; // Accesses 30
+    std::cout << "4.1.1 Element at index 2: " << values.at(2) << std::endl;  // Accesses 30
 
     std::array<int, 4> otherValues;
-    otherValues = values; // std::array can be copied directly
+    otherValues = values;  // std::array can be copied directly
     std::cout << "4.1.1 Copied std::array elements: ";
     for (int val : otherValues)
     {
@@ -323,7 +345,8 @@ void stdArrayFixedExample()
 
 /**
  * **4.2. When to Use `std::array`:**
- * -   When you need a fixed-size array and want the safety, convenience, and features of a standard library container.
+ * -   When you need a fixed-size array and want the safety, convenience, and features of a standard
+ * library container.
  * -   When you want to avoid manual memory management for fixed-size collections.
  * -   As a safer and more feature-rich replacement for C-style fixed-size arrays.
  * -   When performance is critical and stack allocation is preferred over heap.
@@ -341,12 +364,12 @@ int main()
 
     std::cout << "\n--- Section 3.1: C-style Dynamic Arrays (`new`/`delete`) ---" << std::endl;
     cStyleDynamicArrayExample(3);
-    cStyleDynamicArrayExample(0); // Test invalid size
+    cStyleDynamicArrayExample(0);  // Test invalid size
     cStyleDynamicArrayExample(7);
 
     std::cout << "\n--- Section 3.1.2: C-style Dynamic 2D Arrays ---" << std::endl;
     cStyleDynamic2DArrayExample(2, 4);
-    cStyleDynamic2DArrayExample(0, 0); // Test invalid dimensions
+    cStyleDynamic2DArrayExample(0, 0);  // Test invalid dimensions
 
     std::cout << "\n--- Section 3.2: Modern C++ Dynamic Arrays (`std::vector`) ---" << std::endl;
     stdVectorExample();

@@ -7,10 +7,10 @@
  * Date: 2025-05-23
  */
 
-#include <iostream> // For std::cout, std::endl
-#include <string>   // For std::string
-#include <vector>   // For std::vector (for smart pointer context)
-#include <memory>   // For std::unique_ptr, std::shared_ptr (smart pointers)
+#include <iostream>  // For std::cout, std::endl
+#include <string>    // For std::string
+#include <vector>    // For std::vector (for smart pointer context)
+#include <memory>    // For std::unique_ptr, std::shared_ptr (smart pointers)
 
 // =========================================================================
 // 1. Introduction: What are Pointers?
@@ -38,7 +38,8 @@
 
 /**
  * **2. Memory Addresses: The Foundation of Pointers**
- * -   Every variable in your program occupies a specific location in the computer's RAM (Random Access Memory).
+ * -   Every variable in your program occupies a specific location in the computer's RAM (Random
+ * Access Memory).
  * -   This location has a unique numerical address.
  * -   The **address-of operator (`&`)** is used to get the memory address of a variable.
  */
@@ -51,9 +52,12 @@ void demonstrateAddresses()
     char grade = 'A';
 
     std::cout << "--- 2. Memory Addresses Example ---" << std::endl;
-    std::cout << "Address of age: " << &age << std::endl;     // Output: A hexadecimal memory address (e.g., 0x7ffee...)
-    std::cout << "Address of price: " << &price << std::endl; // Output: Another hexadecimal memory address
-    std::cout << "Address of grade: " << &grade << std::endl; // Output: Another hexadecimal memory address
+    std::cout << "Address of age: " << &age
+              << std::endl;  // Output: A hexadecimal memory address (e.g., 0x7ffee...)
+    std::cout << "Address of price: " << &price
+              << std::endl;  // Output: Another hexadecimal memory address
+    std::cout << "Address of grade: " << &grade
+              << std::endl;  // Output: Another hexadecimal memory address
     std::cout << "Value of age: " << age << std::endl;
 }
 
@@ -64,11 +68,13 @@ void demonstrateAddresses()
 /**
  * **3. Pointer Declaration and Initialization**
  * -   **Declaration Syntax:** `dataType* pointerName;`
- * -   The `dataType` specifies the type of data the pointer *points to*, not the type of the pointer itself.
- * -   The `*` indicates that it's a pointer variable. It can be placed next to the type, the name, or in between.
- * Conventionally, `dataType* pointerName` or `dataType *pointerName` are common.
+ * -   The `dataType` specifies the type of data the pointer *points to*, not the type of the
+ * pointer itself.
+ * -   The `*` indicates that it's a pointer variable. It can be placed next to the type, the name,
+ * or in between. Conventionally, `dataType* pointerName` or `dataType *pointerName` are common.
  * -   **Initialization:**
- * -   A pointer should always be initialized to either a valid memory address or `nullptr` (C++11 onwards, preferred over `NULL` or `0`).
+ * -   A pointer should always be initialized to either a valid memory address or `nullptr` (C++11
+ * onwards, preferred over `NULL` or `0`).
  * -   An uninitialized pointer is called a **wild pointer** and can lead to crashes.
  */
 
@@ -76,22 +82,24 @@ void demonstrateAddresses()
 void demonstratePointerDeclaration()
 {
     int value = 42;
-    int *ptr_value; // Declares a pointer to an integer (uninitialized - DANGER!)
+    int* ptr_value;  // Declares a pointer to an integer (uninitialized - DANGER!)
 
-    ptr_value = &value; // Initializes ptr_value with the address of 'value'
+    ptr_value = &value;  // Initializes ptr_value with the address of 'value'
 
     double pi = 3.14;
-    double *ptr_pi = &pi; // Declares and initializes a pointer to a double
+    double* ptr_pi = &pi;  // Declares and initializes a pointer to a double
 
     std::string message = "Hello";
-    std::string *ptr_message = &message; // Pointer to a string
+    std::string* ptr_message = &message;  // Pointer to a string
 
-    int *null_ptr = nullptr; // Modern C++ way to declare a null pointer (points to nothing)
+    int* null_ptr = nullptr;  // Modern C++ way to declare a null pointer (points to nothing)
 
     std::cout << "\n--- 3. Pointer Declaration & Initialization Example ---" << std::endl;
-    std::cout << "Value: " << value << ", Address: " << &value << ", Pointer holds: " << ptr_value << std::endl;
+    std::cout << "Value: " << value << ", Address: " << &value << ", Pointer holds: " << ptr_value
+              << std::endl;
     std::cout << "Pi: " << pi << ", Address: " << &pi << ", Pointer holds: " << ptr_pi << std::endl;
-    std::cout << "Message: " << message << ", Address: " << &message << ", Pointer holds: " << ptr_message << std::endl;
+    std::cout << "Message: " << message << ", Address: " << &message
+              << ", Pointer holds: " << ptr_message << std::endl;
     std::cout << "Null pointer holds: " << null_ptr << std::endl;
 }
 
@@ -104,23 +112,26 @@ void demonstratePointerDeclaration()
  * -   The `*` operator (when used with a pointer variable) is called the **dereference operator**.
  * -   It allows you to access the *value* stored at the memory address that the pointer holds.
  * -   Think of it as "go to this address and give me what's there."
- * -   **Caution:** Dereferencing a `nullptr` or a wild pointer will lead to **undefined behavior** (e.g., segmentation fault, crash).
+ * -   **Caution:** Dereferencing a `nullptr` or a wild pointer will lead to **undefined behavior**
+ * (e.g., segmentation fault, crash).
  */
 
 // Example 4.1: Dereferencing a pointer
 void demonstrateDereferencing()
 {
     int data = 100;
-    int *ptr_data = &data; // ptr_data holds the address of 'data'
+    int* ptr_data = &data;  // ptr_data holds the address of 'data'
 
     std::cout << "\n--- 4. Dereferencing Pointers Example ---" << std::endl;
     std::cout << "Value of data: " << data << std::endl;
     std::cout << "Address held by ptr_data: " << ptr_data << std::endl;
-    std::cout << "Value at address held by ptr_data (*ptr_data): " << *ptr_data << std::endl; // Dereferencing!
+    std::cout << "Value at address held by ptr_data (*ptr_data): " << *ptr_data
+              << std::endl;  // Dereferencing!
 
     // Modifying the value through the pointer
-    *ptr_data = 200;                                                                    // Changes the value of 'data'
-    std::cout << "Value of data after modification via pointer: " << data << std::endl; // Output: 200
+    *ptr_data = 200;  // Changes the value of 'data'
+    std::cout << "Value of data after modification via pointer: " << data
+              << std::endl;  // Output: 200
 }
 
 // =========================================================================
@@ -138,28 +149,31 @@ void demonstrateDereferencing()
 // Example 5.1: Array name as a pointer
 void demonstratePointersAndArrays()
 {
-    int numbers[] = {10, 20, 30, 40, 50}; // An array of 5 integers
+    int numbers[] = {10, 20, 30, 40, 50};  // An array of 5 integers
     int size = sizeof(numbers) / sizeof(numbers[0]);
 
     std::cout << "\n--- 5. Pointers and Arrays Example ---" << std::endl;
     std::cout << "Address of numbers[0]: " << &numbers[0] << std::endl;
-    std::cout << "Value of array name 'numbers' (address of first element): " << numbers << std::endl; // Array name decays to pointer
+    std::cout << "Value of array name 'numbers' (address of first element): " << numbers
+              << std::endl;  // Array name decays to pointer
 
     // Accessing elements using pointer arithmetic (see next section)
     std::cout << "Value of numbers[0] using pointer: " << *numbers << std::endl;
-    std::cout << "Value of numbers[1] using pointer: " << *(numbers + 1) << std::endl; // Same as numbers[1]
+    std::cout << "Value of numbers[1] using pointer: " << *(numbers + 1)
+              << std::endl;  // Same as numbers[1]
 }
 
 // Example 5.2: Array decay when passing to a function
-void printArray(int *arr, int size)
-{ // 'arr' is a pointer, not an array
+void printArray(int* arr, int size)
+{  // 'arr' is a pointer, not an array
     std::cout << "5.2 Inside printArray: ";
     for (int i = 0; i < size; ++i)
     {
-        std::cout << arr[i] << " "; // Can use array-like syntax with pointers
+        std::cout << arr[i] << " ";  // Can use array-like syntax with pointers
     }
     std::cout << std::endl;
-    // std::cout << sizeof(arr) << std::endl; // This would be size of pointer (e.g., 8 bytes), not the array
+    // std::cout << sizeof(arr) << std::endl; // This would be size of pointer (e.g., 8 bytes), not
+    // the array
 }
 
 // =========================================================================
@@ -174,7 +188,8 @@ void printArray(int *arr, int size)
  * -   **Decrement (`--`):** Moves the pointer to the previous memory location.
  * -   **Addition (`+`):** `ptr + N` moves the pointer `N * sizeof(dataType)` bytes forward.
  * -   **Subtraction (`-`):** `ptr - N` moves the pointer `N * sizeof(dataType)` bytes backward.
- * -   **Subtraction of two pointers:** `ptr1 - ptr2` gives the number of elements between them (of the pointer's type).
+ * -   **Subtraction of two pointers:** `ptr1 - ptr2` gives the number of elements between them (of
+ * the pointer's type).
  * -   **Caution:** Pointer arithmetic is typically only meaningful within the bounds of an array.
  * Going out of bounds leads to undefined behavior.
  */
@@ -183,22 +198,22 @@ void printArray(int *arr, int size)
 void demonstratePointerArithmetic()
 {
     int arr[] = {10, 20, 30, 40, 50};
-    int *p = arr; // p points to arr[0]
+    int* p = arr;  // p points to arr[0]
 
     std::cout << "\n--- 6. Pointer Arithmetic Example ---" << std::endl;
     std::cout << "p points to: " << *p << " (address: " << p << ")" << std::endl;
 
-    p++; // Move to the next integer (arr[1])
+    p++;  // Move to the next integer (arr[1])
     std::cout << "p++ points to: " << *p << " (address: " << p << ")" << std::endl;
 
-    p += 2; // Move two integers forward (arr[3])
+    p += 2;  // Move two integers forward (arr[3])
     std::cout << "p += 2 points to: " << *p << " (address: " << p << ")" << std::endl;
 
-    int *q = &arr[4]; // q points to arr[4]
+    int* q = &arr[4];  // q points to arr[4]
     std::cout << "q points to: " << *q << " (address: " << q << ")" << std::endl;
 
     // Difference between two pointers (number of elements between them)
-    std::ptrdiff_t diff = q - p; // q (arr[4]) - p (arr[3]) = 1
+    std::ptrdiff_t diff = q - p;  // q (arr[4]) - p (arr[3]) = 1
     std::cout << "Difference q - p: " << diff << std::endl;
 }
 
@@ -216,19 +231,19 @@ void demonstratePointerArithmetic()
  */
 
 // Example 7.1.1: Pass by Pointer to modify value
-void swapValues(int *a, int *b)
+void swapValues(int* a, int* b)
 {
-    int temp = *a; // Dereference to get value
-    *a = *b;       // Modify value at address 'a'
-    *b = temp;     // Modify value at address 'b'
+    int temp = *a;  // Dereference to get value
+    *a = *b;        // Modify value at address 'a'
+    *b = temp;      // Modify value at address 'b'
 }
 
 /**
  * **7.2. Returning Pointers from Functions:**
  * -   A function can return a pointer.
- * -   **CRITICAL CAUTION:** Never return a pointer to a **local variable** declared inside the function.
- * Local variables are destroyed when the function exits, making the returned pointer a **dangling pointer**
- * (it points to invalid memory).
+ * -   **CRITICAL CAUTION:** Never return a pointer to a **local variable** declared inside the
+ * function. Local variables are destroyed when the function exits, making the returned pointer a
+ * **dangling pointer** (it points to invalid memory).
  * -   It's safe to return pointers to:
  * -   Dynamically allocated memory (allocated with `new`).
  * -   Global or static variables.
@@ -242,10 +257,10 @@ void swapValues(int *a, int *b)
 // }
 
 // Example 7.2.2: Safe - Returning pointer to dynamically allocated memory
-int *createDynamicInt(int value)
+int* createDynamicInt(int value)
 {
-    int *ptr = new int(value); // Allocate on heap
-    return ptr;                // Safe to return, caller must delete
+    int* ptr = new int(value);  // Allocate on heap
+    return ptr;                 // Safe to return, caller must delete
 }
 
 // =========================================================================
@@ -257,7 +272,8 @@ int *createDynamicInt(int value)
  * -   A pointer to a pointer is a variable that stores the memory address of another pointer.
  * -   Syntax: `dataType** pointerToPointerName;`
  * -   Used in scenarios like:
- * -   Passing a pointer by reference to a function (so the function can modify which memory the original pointer points to).
+ * -   Passing a pointer by reference to a function (so the function can modify which memory the
+ * original pointer points to).
  * -   Working with arrays of pointers (e.g., C-style dynamic 2D arrays).
  */
 
@@ -265,8 +281,8 @@ int *createDynamicInt(int value)
 void demonstrateDoublePointer()
 {
     int val = 10;
-    int *ptr = &val;         // ptr points to val
-    int **ptr_to_ptr = &ptr; // ptr_to_ptr points to ptr
+    int* ptr = &val;          // ptr points to val
+    int** ptr_to_ptr = &ptr;  // ptr_to_ptr points to ptr
 
     std::cout << "\n--- 8. Pointers to Pointers Example ---" << std::endl;
     std::cout << "Value of val: " << val << std::endl;
@@ -275,12 +291,15 @@ void demonstrateDoublePointer()
     std::cout << "Address of ptr: " << &ptr << std::endl;
     std::cout << "Value of ptr_to_ptr (address of ptr): " << ptr_to_ptr << std::endl;
 
-    std::cout << "Dereferencing ptr_to_ptr once (*ptr_to_ptr): " << *ptr_to_ptr << " (which is the value of ptr)" << std::endl;
-    std::cout << "Dereferencing ptr_to_ptr twice (**ptr_to_ptr): " << **ptr_to_ptr << " (which is the value of val)" << std::endl;
+    std::cout << "Dereferencing ptr_to_ptr once (*ptr_to_ptr): " << *ptr_to_ptr
+              << " (which is the value of ptr)" << std::endl;
+    std::cout << "Dereferencing ptr_to_ptr twice (**ptr_to_ptr): " << **ptr_to_ptr
+              << " (which is the value of val)" << std::endl;
 
     // Modifying val through double pointer
     **ptr_to_ptr = 20;
-    std::cout << "Value of val after modification via double pointer: " << val << std::endl; // Output: 20
+    std::cout << "Value of val after modification via double pointer: " << val
+              << std::endl;  // Output: 20
 }
 
 // =========================================================================
@@ -299,11 +318,11 @@ void demonstrateDoublePointer()
  */
 
 // Example 9.1.1: Pointer to const data
-void printConstData(const int *p)
+void printConstData(const int* p)
 {
     // *p = 10; // ERROR: cannot assign to a variable that is const
     std::cout << "9.1.1 Value pointed to by const int*: " << *p << std::endl;
-    p++; // OK: pointer itself can be changed
+    p++;  // OK: pointer itself can be changed
 }
 
 /**
@@ -316,9 +335,9 @@ void printConstData(const int *p)
 void demonstrateConstPointer()
 {
     int val = 50;
-    int *const ptr = &val; // ptr is a constant pointer to val
+    int* const ptr = &val;  // ptr is a constant pointer to val
 
-    *ptr = 60; // OK: value can be modified through the pointer
+    *ptr = 60;  // OK: value can be modified through the pointer
     std::cout << "9.2.1 Value via const pointer: " << *ptr << std::endl;
 
     // ptr++; // ERROR: cannot increment a const pointer
@@ -334,8 +353,8 @@ void demonstrateConstPointer()
 // Example 9.3.1: Const pointer to const data
 void demonstrateConstConstPointer()
 {
-    const int val = 70;          // val itself is const
-    const int *const ptr = &val; // ptr is a const pointer to const data
+    const int val = 70;           // val itself is const
+    const int* const ptr = &val;  // ptr is a const pointer to const data
 
     // *ptr = 80; // ERROR: cannot modify const data
     // ptr++; // ERROR: cannot modify const pointer
@@ -350,7 +369,8 @@ void demonstrateConstConstPointer()
  * **10. Dynamic Memory Allocation (`new` and `delete`)**
  * -   Pointers are essential for dynamic memory allocation, which happens on the **heap**.
  * -   Memory allocated on the heap persists until explicitly deallocated or the program ends.
- * -   **`new` operator:** Allocates memory on the heap and returns a pointer to the allocated memory.
+ * -   **`new` operator:** Allocates memory on the heap and returns a pointer to the allocated
+ * memory.
  * -   **`delete` operator:** Deallocates memory previously allocated with `new`.
  * -   **`delete[]` operator:** Deallocates memory for arrays allocated with `new[]`.
  * -   **CRITICAL:** Every `new` must have a corresponding `delete` (or `new[]` with `delete[]`)
@@ -360,12 +380,12 @@ void demonstrateConstConstPointer()
 // Example 10.1: Allocating a single variable dynamically
 void allocateSingleInt()
 {
-    int *dynamicInt = new int; // Allocate memory for one int on the heap
-    *dynamicInt = 123;         // Store a value in the allocated memory
+    int* dynamicInt = new int;  // Allocate memory for one int on the heap
+    *dynamicInt = 123;          // Store a value in the allocated memory
     std::cout << "\n--- 10. Dynamic Memory Allocation Example ---" << std::endl;
     std::cout << "10.1 Dynamically allocated int: " << *dynamicInt << std::endl;
-    delete dynamicInt;    // Deallocate the memory
-    dynamicInt = nullptr; // Best practice: set pointer to nullptr after deletion
+    delete dynamicInt;     // Deallocate the memory
+    dynamicInt = nullptr;  // Best practice: set pointer to nullptr after deletion
     std::cout << "10.1 Memory for dynamicInt deallocated." << std::endl;
 }
 
@@ -373,7 +393,7 @@ void allocateSingleInt()
 void allocateDynamicArray()
 {
     int size = 5;
-    int *dynamicArray = new int[size]; // Allocate memory for 5 ints on the heap
+    int* dynamicArray = new int[size];  // Allocate memory for 5 ints on the heap
 
     for (int i = 0; i < size; ++i)
     {
@@ -387,7 +407,7 @@ void allocateDynamicArray()
     }
     std::cout << std::endl;
 
-    delete[] dynamicArray; // Deallocate the entire array
+    delete[] dynamicArray;  // Deallocate the entire array
     dynamicArray = nullptr;
     std::cout << "10.2 Memory for dynamicArray deallocated." << std::endl;
 }
@@ -399,7 +419,8 @@ void allocateDynamicArray()
 /**
  * **11. Null Pointers (`nullptr`)**
  * -   `nullptr` (introduced in C++11) is a keyword that represents a null pointer constant.
- * -   It is the preferred way to indicate that a pointer does not point to any valid memory location.
+ * -   It is the preferred way to indicate that a pointer does not point to any valid memory
+ * location.
  * -   It is type-safe, unlike `NULL` (which is often defined as `0` or `(void*)0`).
  * -   Always check if a pointer is `nullptr` before dereferencing it to prevent crashes.
  */
@@ -407,7 +428,7 @@ void allocateDynamicArray()
 // Example 11.1: Using nullptr
 void demonstrateNullptr()
 {
-    int *safePtr = nullptr; // Initialize to null
+    int* safePtr = nullptr;  // Initialize to null
     // int* unsafePtr; // Wild pointer - DANGER!
 
     std::cout << "\n--- 11. Null Pointers Example ---" << std::endl;
@@ -436,7 +457,8 @@ void demonstrateNullptr()
  *
  * 12.2. **Dangling Pointers:**
  * -   A pointer that points to a memory location that has been deallocated or no longer exists.
- * -   This happens when the memory a pointer points to is freed, but the pointer itself is not set to `nullptr`.
+ * -   This happens when the memory a pointer points to is freed, but the pointer itself is not set
+ * to `nullptr`.
  * -   Dereferencing a dangling pointer leads to undefined behavior.
  * -   **Prevention:** After `delete`ing memory, set the pointer to `nullptr`.
  */
@@ -444,13 +466,14 @@ void demonstrateNullptr()
 // Example 12.1: Dangling pointer
 void demonstrateDanglingPointer()
 {
-    int *ptr = new int(10);
+    int* ptr = new int(10);
     std::cout << "\n--- 12. Dangling Pointers Example ---" << std::endl;
     std::cout << "12.1 Value before delete: " << *ptr << std::endl;
-    delete ptr; // Memory is freed, but ptr still holds the old address
+    delete ptr;  // Memory is freed, but ptr still holds the old address
     // ptr = nullptr; // If this line is uncommented, it prevents dangling pointer
     std::cout << "12.1 After delete, ptr points to: " << ptr << std::endl;
-    // std::cout << "12.1 Value after delete (DANGER!): " << *ptr << std::endl; // DANGER! Dereferencing dangling pointer
+    // std::cout << "12.1 Value after delete (DANGER!): " << *ptr << std::endl; // DANGER!
+    // Dereferencing dangling pointer
 }
 
 // =========================================================================
@@ -459,8 +482,8 @@ void demonstrateDanglingPointer()
 
 /**
  * **13. Smart Pointers (Modern C++ Alternatives - Brief Introduction)**
- * -   Modern C++ (C++11 onwards) provides **smart pointers** (`std::unique_ptr`, `std::shared_ptr`, `std::weak_ptr`)
- * to automate memory management and prevent memory leaks and dangling pointers.
+ * -   Modern C++ (C++11 onwards) provides **smart pointers** (`std::unique_ptr`, `std::shared_ptr`,
+ * `std::weak_ptr`) to automate memory management and prevent memory leaks and dangling pointers.
  * -   They are wrapper classes around raw pointers that automatically call `delete` when the
  * object goes out of scope or is no longer needed.
  * -   **Rule of Thumb:** Prefer smart pointers over raw `new`/`delete` whenever possible.
@@ -480,10 +503,12 @@ void demonstrateUniquePtr()
 void demonstrateSharedPtr()
 {
     std::shared_ptr<std::string> sPtr1(new std::string("Shared Data"));
-    std::cout << "13.2 shared_ptr1 value: " << *sPtr1 << ", use count: " << sPtr1.use_count() << std::endl;
+    std::cout << "13.2 shared_ptr1 value: " << *sPtr1 << ", use count: " << sPtr1.use_count()
+              << std::endl;
 
-    std::shared_ptr<std::string> sPtr2 = sPtr1; // sPtr2 now shares ownership
-    std::cout << "13.2 shared_ptr2 value: " << *sPtr2 << ", use count: " << sPtr1.use_count() << std::endl;
+    std::shared_ptr<std::string> sPtr2 = sPtr1;  // sPtr2 now shares ownership
+    std::cout << "13.2 shared_ptr2 value: " << *sPtr2 << ", use count: " << sPtr1.use_count()
+              << std::endl;
 
     // Memory is deallocated only when the last shared_ptr owning it is destroyed
 }
@@ -510,14 +535,16 @@ void demonstrateSharedPtr()
  * 14.5. **Set to `nullptr` After `delete`:** After `delete`ing memory pointed to by a raw pointer,
  * set the pointer to `nullptr` to prevent it from becoming a dangling pointer.
  *
- * 14.6. **Use `const` Correctly:** Apply `const` to pointers to enforce read-only access where appropriate,
- * improving safety and clarity.
+ * 14.6. **Use `const` Correctly:** Apply `const` to pointers to enforce read-only access where
+ * appropriate, improving safety and clarity.
  *
- * 14.7. **Avoid Returning Pointers to Local Variables:** Never return the address of a local stack variable.
+ * 14.7. **Avoid Returning Pointers to Local Variables:** Never return the address of a local stack
+ * variable.
  *
- * 14.8. **Pass by Reference (`&`) for Value Modification:** For modifying simple variables in functions,
- * prefer pass by reference (`int&`) over pass by pointer (`int*`) for cleaner syntax and safety,
- * unless pointer semantics are specifically needed (e.g., optional parameters, dynamic arrays).
+ * 14.8. **Pass by Reference (`&`) for Value Modification:** For modifying simple variables in
+ * functions, prefer pass by reference (`int&`) over pass by pointer (`int*`) for cleaner syntax and
+ * safety, unless pointer semantics are specifically needed (e.g., optional parameters, dynamic
+ * arrays).
  */
 
 // =========================================================================
@@ -530,30 +557,30 @@ int main()
     demonstratePointerDeclaration();
     demonstrateDereferencing();
     demonstratePointersAndArrays();
-    printArray(new int[3]{10, 20, 30}, 3); // Example of passing dynamic array to function
-    delete[] new int[3];                   // Clean up temp array
+    printArray(new int[3]{10, 20, 30}, 3);  // Example of passing dynamic array to function
+    delete[] new int[3];                    // Clean up temp array
     demonstratePointerArithmetic();
 
     std::cout << "\n--- 7. Pointers and Functions Example ---" << std::endl;
     int val1 = 5, val2 = 10;
     std::cout << "Before swap: val1 = " << val1 << ", val2 = " << val2 << std::endl;
-    swapValues(&val1, &val2); // Pass addresses
+    swapValues(&val1, &val2);  // Pass addresses
     std::cout << "After swap: val1 = " << val1 << ", val2 = " << val2 << std::endl;
 
-    int *dynamicValPtr = createDynamicInt(99);
+    int* dynamicValPtr = createDynamicInt(99);
     std::cout << "Value from createDynamicInt: " << *dynamicValPtr << std::endl;
-    delete dynamicValPtr; // Clean up dynamically allocated memory
+    delete dynamicValPtr;  // Clean up dynamically allocated memory
     dynamicValPtr = nullptr;
 
     demonstrateDoublePointer();
-    printConstData(new int(123)); // Example with pointer to const data
+    printConstData(new int(123));  // Example with pointer to const data
     demonstrateConstPointer();
     demonstrateConstConstPointer();
 
     allocateSingleInt();
     allocateDynamicArray();
     demonstrateNullptr();
-    demonstrateDanglingPointer(); // Be aware of potential crash if dereferenced after delete
+    demonstrateDanglingPointer();  // Be aware of potential crash if dereferenced after delete
 
     demonstrateUniquePtr();
     demonstrateSharedPtr();

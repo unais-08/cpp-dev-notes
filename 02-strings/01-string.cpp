@@ -5,10 +5,10 @@
  * characteristics, common operations, and best practices.
  */
 
-#include <iostream> // For std::cout, std::endl, std::cin
-#include <string>   // For std::string class
-#include <cstring>  // For C-style string functions (strlen, strcpy, etc.)
-#include <limits>   // For std::numeric_limits (used with std::cin.ignore)
+#include <iostream>  // For std::cout, std::endl, std::cin
+#include <string>    // For std::string class
+#include <cstring>   // For C-style string functions (strlen, strcpy, etc.)
+#include <limits>    // For std::numeric_limits (used with std::cin.ignore)
 
 // =========================================================================
 // 1. Introduction: What are Strings in C++?
@@ -45,9 +45,9 @@
  */
 
 // Example 2.1.1: C-style string declaration and initialization
-char c_str1[] = "Hello";                // Size will be 6 (H,e,l,l,o,\0)
-char c_str2[10] = "World";              // Size 10, initialized with "World\0", remaining 4 chars are \0
-char c_str3[5] = {'C', '+', '+', '\0'}; // Explicit null termination, size 5
+char c_str1[] = "Hello";    // Size will be 6 (H,e,l,l,o,\0)
+char c_str2[10] = "World";  // Size 10, initialized with "World\0", remaining 4 chars are \0
+char c_str3[5] = {'C', '+', '+', '\0'};  // Explicit null termination, size 5
 // char c_str4[3] = "TooLong"; // ERROR: Initializer string is too long for array size
 
 /**
@@ -64,7 +64,8 @@ char c_str3[5] = {'C', '+', '+', '\0'}; // Explicit null termination, size 5
 void demonstrate_strlen()
 {
     char text[] = "Programming";
-    std::cout << "2.2.1 Length of '" << text << "': " << std::strlen(text) << std::endl; // Output: 11
+    std::cout << "2.2.1 Length of '" << text << "': " << std::strlen(text)
+              << std::endl;  // Output: 11
 }
 
 // Example 2.2.2: strcpy (string copy)
@@ -72,7 +73,7 @@ void demonstrate_strlen()
 void demonstrate_strcpy()
 {
     char source[] = "Source String";
-    char destination[20]; // Ensure destination is large enough!
+    char destination[20];  // Ensure destination is large enough!
     std::strcpy(destination, source);
     std::cout << "2.2.2 Copied string: " << destination << std::endl;
 
@@ -85,10 +86,10 @@ void demonstrate_strcpy()
 // char* strcat(char* destination, const char* source); // Appends source to destination
 void demonstrate_strcat()
 {
-    char str_part1[20] = "Hello"; // Must have enough space for concatenation
+    char str_part1[20] = "Hello";  // Must have enough space for concatenation
     char str_part2[] = " World!";
     std::strcat(str_part1, str_part2);
-    std::cout << "2.2.3 Concatenated string: " << str_part1 << std::endl; // Output: Hello World!
+    std::cout << "2.2.3 Concatenated string: " << str_part1 << std::endl;  // Output: Hello World!
 }
 
 // Example 2.2.4: strcmp (string compare)
@@ -100,8 +101,10 @@ void demonstrate_strcmp()
     char s2[] = "banana";
     char s3[] = "apple";
 
-    std::cout << "2.2.4 Comparing 'apple' and 'banana': " << std::strcmp(s1, s2) << std::endl; // Negative
-    std::cout << "2.2.4 Comparing 'banana' and 'apple': " << std::strcmp(s2, s1) << std::endl; // Positive
+    std::cout << "2.2.4 Comparing 'apple' and 'banana': " << std::strcmp(s1, s2)
+              << std::endl;  // Negative
+    std::cout << "2.2.4 Comparing 'banana' and 'apple': " << std::strcmp(s2, s1)
+              << std::endl;  // Positive
     std::cout << "2.2.4 Comparing 'apple' and 'apple': " << std::strcmp(s1, s3) << std::endl;  // 0
 }
 
@@ -116,7 +119,7 @@ void input_c_style_string()
 {
     char name_c_style[50];
     std::cout << "2.3.1 Enter your first name (C-style): ";
-    std::cin >> name_c_style; // Reads until whitespace
+    std::cin >> name_c_style;  // Reads until whitespace
     std::cout << "Hello, " << name_c_style << "!" << std::endl;
 
     // Clear input buffer for subsequent std::cin.getline
@@ -124,7 +127,7 @@ void input_c_style_string()
 
     char full_name_c_style[100];
     std::cout << "2.3.1 Enter your full name (C-style, with spaces): ";
-    std::cin.getline(full_name_c_style, 100); // Reads entire line
+    std::cin.getline(full_name_c_style, 100);  // Reads entire line
     std::cout << "Welcome, " << full_name_c_style << "!" << std::endl;
 }
 
@@ -147,12 +150,12 @@ void input_c_style_string()
  */
 
 // Example 3.1.1: std::string declaration and initialization
-std::string s1 = "Hello, C++";  // Direct initialization
-std::string s2("World");        // Constructor initialization
-std::string s3;                 // Default-constructed (empty string)
-std::string s4(s1);             // Copy constructor
-std::string s5(5, 'X');         // s5 will be "XXXXX"
-std::string s6 = s1 + " " + s2; // Concatenation using + operator
+std::string s1 = "Hello, C++";   // Direct initialization
+std::string s2("World");         // Constructor initialization
+std::string s3;                  // Default-constructed (empty string)
+std::string s4(s1);              // Copy constructor
+std::string s5(5, 'X');          // s5 will be "XXXXX"
+std::string s6 = s1 + " " + s2;  // Concatenation using + operator
 
 /**
  * **3.2. Common `std::string` Methods:**
@@ -175,13 +178,15 @@ void demonstrate_std_string_basics()
     std::string message = "Hello";
     std::string name = "Alice";
 
-    std::cout << "3.2.1 Initial message: " << message << ", length: " << message.length() << std::endl;
+    std::cout << "3.2.1 Initial message: " << message << ", length: " << message.length()
+              << std::endl;
 
-    message += ", " + name + "!"; // Concatenation
-    std::cout << "3.2.1 Concatenated message: " << message << ", length: " << message.size() << std::endl;
+    message += ", " + name + "!";  // Concatenation
+    std::cout << "3.2.1 Concatenated message: " << message << ", length: " << message.size()
+              << std::endl;
 
-    std::cout << "3.2.1 Character at index 0: " << message[0] << std::endl;                 // H
-    std::cout << "3.2.1 Character at index 7 (with .at()): " << message.at(7) << std::endl; // A
+    std::cout << "3.2.1 Character at index 0: " << message[0] << std::endl;                  // H
+    std::cout << "3.2.1 Character at index 7 (with .at()): " << message.at(7) << std::endl;  // A
 
     // message.at(100); // This would throw std::out_of_range exception
 
@@ -203,8 +208,8 @@ void demonstrate_std_string_search_substr()
     // Find a substring
     size_t pos = sentence.find("fox");
     if (pos != std::string::npos)
-    {                                                                       // std::string::npos indicates not found
-        std::cout << "3.2.2 'fox' found at position: " << pos << std::endl; // Output: 16
+    {  // std::string::npos indicates not found
+        std::cout << "3.2.2 'fox' found at position: " << pos << std::endl;  // Output: 16
     }
     else
     {
@@ -212,10 +217,10 @@ void demonstrate_std_string_search_substr()
     }
 
     // Extract a substring
-    std::string sub = sentence.substr(4, 5); // Start at index 4, length 5 => "quick"
+    std::string sub = sentence.substr(4, 5);  // Start at index 4, length 5 => "quick"
     std::cout << "3.2.2 Substring (quick): " << sub << std::endl;
 
-    std::string lastWord = sentence.substr(sentence.find_last_of(' ') + 1); // Extract "dog."
+    std::string lastWord = sentence.substr(sentence.find_last_of(' ') + 1);  // Extract "dog."
     std::cout << "3.2.2 Last word: " << lastWord << std::endl;
 }
 
@@ -227,7 +232,7 @@ void demonstrate_std_string_comparison()
     std::string strC = "apple";
 
     if (strA == strC)
-    { // Direct comparison using == operator
+    {  // Direct comparison using == operator
         std::cout << "3.2.3 'apple' == 'apple'" << std::endl;
     }
     if (strA != strB)
@@ -235,13 +240,13 @@ void demonstrate_std_string_comparison()
         std::cout << "3.2.3 'apple' != 'banana'" << std::endl;
     }
     if (strA < strB)
-    { // Lexicographical comparison using < operator
+    {  // Lexicographical comparison using < operator
         std::cout << "3.2.3 'apple' < 'banana'" << std::endl;
     }
 
     // Using compare() method (returns 0 if equal, <0 if str1 < str2, >0 if str1 > str2)
-    std::cout << "3.2.3 strA.compare(strB): " << strA.compare(strB) << std::endl; // Negative
-    std::cout << "3.2.3 strA.compare(strC): " << strA.compare(strC) << std::endl; // 0
+    std::cout << "3.2.3 strA.compare(strB): " << strA.compare(strB) << std::endl;  // Negative
+    std::cout << "3.2.3 strA.compare(strC): " << strA.compare(strC) << std::endl;  // 0
 }
 
 /**
@@ -256,7 +261,7 @@ void input_std_string()
 {
     std::string firstName;
     std::cout << "3.3.1 Enter your first name (std::string): ";
-    std::cin >> firstName; // Reads until whitespace
+    std::cin >> firstName;  // Reads until whitespace
     std::cout << "Hello, " << firstName << "!" << std::endl;
 
     // Clear input buffer for subsequent std::getline
@@ -264,15 +269,17 @@ void input_std_string()
 
     std::string fullName;
     std::cout << "3.3.1 Enter your full name (std::string, with spaces): ";
-    std::getline(std::cin, fullName); // Reads entire line
+    std::getline(std::cin, fullName);  // Reads entire line
     std::cout << "Welcome, " << fullName << "!" << std::endl;
 }
 
 /**
  * **3.4. Conversion between `std::string` and C-style Strings:**
  * -   `std::string::c_str()`: Returns a `const char*` (C-style string) representation.
- * The returned pointer is valid only as long as the `std::string` object exists and is not modified.
- * -   `std::string::data()`: (C++11 onwards) Similar to `c_str()`, but returns `char*` for non-const strings (C++17 onwards).
+ * The returned pointer is valid only as long as the `std::string` object exists and is not
+ * modified.
+ * -   `std::string::data()`: (C++11 onwards) Similar to `c_str()`, but returns `char*` for
+ * non-const strings (C++17 onwards).
  * -   C-style string to `std::string`: Direct assignment or constructor.
  */
 
@@ -280,11 +287,11 @@ void input_std_string()
 void demonstrate_string_conversions()
 {
     std::string cpp_str = "Modern C++";
-    const char *c_str_from_cpp = cpp_str.c_str(); // Get C-style string from std::string
+    const char* c_str_from_cpp = cpp_str.c_str();  // Get C-style string from std::string
     std::cout << "3.4.1 std::string to C-style: " << c_str_from_cpp << std::endl;
 
     char old_c_str[] = "Legacy C";
-    std::string cpp_str_from_c = old_c_str; // C-style string to std::string
+    std::string cpp_str_from_c = old_c_str;  // C-style string to std::string
     std::cout << "3.4.1 C-style to std::string: " << cpp_str_from_c << std::endl;
 }
 
@@ -300,7 +307,7 @@ void demonstrate_string_conversions()
  */
 
 // Example 4.1: String literals
-const char *literal_ptr = "This is a string literal.";
+const char* literal_ptr = "This is a string literal.";
 // literal_ptr[0] = 'X'; // ERROR: Attempting to modify read-only memory
 
 // =========================================================================
@@ -324,7 +331,7 @@ void demonstrate_raw_string_literals()
     std::string windowsPath = R"(C:\Program Files\MyApp\config.ini)";
     std::cout << "5.1 Windows path: " << windowsPath << std::endl;
 
-    std::string regexPattern = R"(\d{3}-\d{2}-\d{4})"; // No need to escape backslashes
+    std::string regexPattern = R"(\d{3}-\d{2}-\d{4})";  // No need to escape backslashes
     std::cout << "5.1 Regex pattern: " << regexPattern << std::endl;
 
     // With custom delimiter
@@ -333,8 +340,7 @@ void demonstrate_raw_string_literals()
             <item id="1">Value1</item>
         </data>
     )xml";
-    std::cout << "5.1 XML content:\n"
-              << xmlContent << std::endl;
+    std::cout << "5.1 XML content:\n" << xmlContent << std::endl;
 }
 
 // =========================================================================
@@ -354,19 +360,24 @@ void demonstrate_raw_string_literals()
  * -   If you must use them, ensure destination buffers are sufficiently large.
  *
  * 6.3. **Use `std::getline` for Line Input:**
- * -   When reading entire lines from input (including spaces), always use `std::getline(std::cin, myString)`.
- * -   Be mindful of leftover newlines in the input buffer after `std::cin >> var;` and use `std::cin.ignore()` if needed.
+ * -   When reading entire lines from input (including spaces), always use `std::getline(std::cin,
+ * myString)`.
+ * -   Be mindful of leftover newlines in the input buffer after `std::cin >> var;` and use
+ * `std::cin.ignore()` if needed.
  *
  * 6.4. **Use `const std::string&` for Function Parameters:**
- * -   When passing `std::string` objects to functions, pass them by `const reference` (`const std::string&`).
- * -   This avoids unnecessary copying (improves performance) and ensures the original string is not modified.
+ * -   When passing `std::string` objects to functions, pass them by `const reference` (`const
+ * std::string&`).
+ * -   This avoids unnecessary copying (improves performance) and ensures the original string is not
+ * modified.
  *
  * 6.5. **Consider String Views (`std::string_view` - C++17):**
  * -   For read-only access to string data (e.g., substrings) without making a copy,
  * `std::string_view` is a lightweight, non-owning type that can improve performance.
  *
  * 6.6. **Understand Null Termination:**
- * -   Always remember that C-style strings are null-terminated. `std::string` handles this internally.
+ * -   Always remember that C-style strings are null-terminated. `std::string` handles this
+ * internally.
  */
 
 // =========================================================================

@@ -23,7 +23,7 @@ int main()
     // 'int': The most common integer type. Its size is typically 4 bytes (32 bits),
     // but it can vary based on the system.
     // It can store values roughly from -2 billion to +2 billion.
-    int age = 30; // Declaration and initialization of an integer variable.
+    int age = 30;  // Declaration and initialization of an integer variable.
     std::cout << "1. Integer Types:" << std::endl;
     std::cout << "Age: " << age << std::endl;
 
@@ -34,12 +34,12 @@ int main()
 
     // 'long int' (or just 'long'): Typically 4 or 8 bytes (32 or 64 bits).
     // Guarantees at least the range of 'int'.
-    long int distance = 1000000000; // 1 billion
+    long int distance = 1000000000;  // 1 billion
     std::cout << "Distance (long): " << distance << std::endl;
 
     // 'long long int' (or just 'long long'): Guarantees at least 8 bytes (64 bits).
     // Used for very large integer values.
-    long long int population = 8000000000LL; // 8 billion (LL suffix for long long literal)
+    long long int population = 8000000000LL;  // 8 billion (LL suffix for long long literal)
     std::cout << "Population (long long): " << population << std::endl;
 
     // Unsigned integer types: Store only non-negative values (0 and positive).
@@ -52,7 +52,7 @@ int main()
 
     // 'float': Single-precision floating-point type. Typically 4 bytes.
     // Provides about 6-7 decimal digits of precision.
-    float temperature = 25.5f; // 'f' suffix is important for float literals
+    float temperature = 25.5f;  // 'f' suffix is important for float literals
     std::cout << "\n2. Floating-Point Types:" << std::endl;
     std::cout << "Temperature (float): " << temperature << std::endl;
 
@@ -64,13 +64,13 @@ int main()
 
     // 'long double': Extended precision floating-point type. Size varies (e.g., 10 or 16 bytes).
     // Provides even more precision, if available.
-    long double precisePi = 3.14159265358979323846L; // 'L' suffix for long double literal
+    long double precisePi = 3.14159265358979323846L;  // 'L' suffix for long double literal
     std::cout << "Precise Pi (long double): " << precisePi << std::endl;
 
     // --- 3. Character Data Type ---
     // 'char': Used to store single characters (letters, numbers, symbols).
     // Internally, characters are stored as small integer values (ASCII/Unicode).
-    char grade = 'A'; // Single quotes for character literals
+    char grade = 'A';  // Single quotes for character literals
     char initial = 'J';
     std::cout << "\n3. Character Type:" << std::endl;
     std::cout << "Grade: " << grade << std::endl;
@@ -79,28 +79,28 @@ int main()
     // --- 4. Boolean Data Type ---
     // 'bool': Used to store logical values: 'true' or 'false'.
     // Typically takes 1 byte of memory.
-    bool isOpen = true;     // Represents a true condition
-    bool hasErrors = false; // Represents a false condition
+    bool isOpen = true;      // Represents a true condition
+    bool hasErrors = false;  // Represents a false condition
     std::cout << "\n4. Boolean Type:" << std::endl;
-    std::cout << "Is Open: " << isOpen << std::endl; // Prints 1 for true, 0 for false by default
+    std::cout << "Is Open: " << isOpen << std::endl;  // Prints 1 for true, 0 for false by default
     std::cout << "Has Errors: " << hasErrors << std::endl;
 
     // It's good practice to make the output clearer for booleans:
     // std::boolalpha manipulator makes cout print "true" or "false" instead of 1 or 0.
-    std::cout << std::boolalpha; // Sets output stream to print bools as "true"/"false"
+    std::cout << std::boolalpha;  // Sets output stream to print bools as "true"/"false"
     std::cout << "Is Open (boolalpha): " << isOpen << std::endl;
     std::cout << "Has Errors (boolalpha): " << hasErrors << std::endl;
-    std::cout << std::noboolalpha; // Resets output stream to print bools as 1/0
+    std::cout << std::noboolalpha;  // Resets output stream to print bools as 1/0
 
     // --- 5. Variable Declaration vs. Initialization ---
     // Declaration: Reserves memory for a variable, but doesn't give it a value.
-    int declaredVariable; // declaredVariable now holds an "indeterminate" value (garbage)
+    int declaredVariable;  // declaredVariable now holds an "indeterminate" value (garbage)
 
     // Initialization: Assigns an initial value to a variable at the time of declaration.
     int initializedVariable = 10;
 
     // Assignment: Changing the value of an already declared variable.
-    declaredVariable = 20; // Now declaredVariable has a defined value
+    declaredVariable = 20;  // Now declaredVariable has a defined value
 
     std::cout << "\n5. Declaration vs. Initialization:" << std::endl;
     std::cout << "Initialized Variable: " << initializedVariable << std::endl;
