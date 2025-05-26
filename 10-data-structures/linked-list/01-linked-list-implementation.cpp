@@ -188,6 +188,87 @@ class LinkedList
      * @return The length of the linked list.
      */
     int getLength() const { return length; }
+
+    bool insert(int value, int index)
+    {
+        if (head == nullptr)
+        {
+            prepend(value);
+            return true;
+        }
+        if (index == length - 1)
+        {
+            append(value);
+            return true;
+        }
+        Node* newNode = new Node(value);
+        Node* prev = head;
+        for (int i = 0; i < index; i++)
+        {
+            prev = prev->next;
+        }
+        newNode->next = prev->next;
+        prev->next = newNode;
+        length++;
+        return true;
+    }
+
+    bool deletePosition(int index)
+    {
+        if (head == nullptr)
+        {
+            std::cout << "Empty List" << std::endl;
+            return false;
+        }
+
+        if (index < 0 || index >= length)
+        {
+            std::cout << "Index out of bounds" << std::endl;
+            return false;
+        }
+
+        Node* toDelete = nullptr;
+
+        if (index == 0)
+        {
+            toDelete = head;
+            head = head->next;
+        }
+        else
+        {
+            Node* prev = head;
+            for (int i = 0; i < index - 1; i++)
+            {
+                prev = prev->next;
+            }
+
+            toDelete = prev->next;
+            prev->next = toDelete->next;
+        }
+
+        delete toDelete;
+        length--;
+        return true;
+    }
+
+    // 1->2->3->4->5
+    // 5->2->3->4->1
+    void reverseLinkedList()
+    {
+        Node* temp = head;
+        head = tail;
+        tail = temp;
+        Node* before = nullptr;
+        Node* after = temp->next;
+        for (int i = 0; i < length; i++)
+        {
+            after = temp->next;
+            temp->next = before;
+            before=temp;
+            temp = after;
+            // temp = after;
+        }
+    }
 };
 
 // --- Main function for demonstration ---
@@ -222,6 +303,14 @@ int main()
 
     // Attempt to delete from an empty list
     my_list.deleteFirst();  // Output: Error: Cannot delete from an empty list.
+    LinkedList* myll = new LinkedList(10);
+    myll->append(20);
+    myll->append(30);
+    myll->append(40);
+    myll->append(50);
 
+    myll->printList();
+    myll->reverseLinkedList();
+    myll->printList();
     return 0;  // Indicate successful execution
 }
