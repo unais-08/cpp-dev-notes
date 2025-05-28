@@ -1,7 +1,7 @@
 // Que: Return the middle index element from Linked List
 
 #include <iostream>  // Required for input/output operations, like std::cout
-
+#include <stack>
 /**
  * @brief Represents a single node in the linked list.
  *
@@ -114,6 +114,16 @@ class LinkedList
      * Displays the list in the format: value1 --> value2 --> ... --> nullptr
      */
     void printList() const
+    {
+        Node* temp = head;  // Start from the head
+        while (temp != nullptr)
+        {
+            std::cout << temp->value << " --> ";  // Print current node's value
+            temp = temp->next;                    // Move to the next node
+        }
+        std::cout << "nullptr" << std::endl;  // Indicate the end of the list
+    }
+    void printList(Node* head) const
     {
         Node* temp = head;  // Start from the head
         while (temp != nullptr)
@@ -255,6 +265,20 @@ class LinkedList
 
     // 1->2->3->4->5
     // 5->2->3->4->1
+    Node* striverReverseLinkedList()
+    {
+        Node* temp = head;
+        Node* prev = nullptr;
+        // Node* after = nullptr;
+        while (temp != nullptr)
+        {
+            Node* after = temp->next;
+            temp->next = prev;
+            prev = temp;
+            temp = after;
+        }
+        return prev;
+    }
     void reverseLinkedList()
     {
         Node* temp = head;
@@ -271,7 +295,23 @@ class LinkedList
             // temp = after;
         }
     }
-
+    void bruteForceReverseLinkedList()
+    {
+        Node* temp = head;
+        std::stack<int> st;
+        while (temp)
+        {
+            st.push(temp->value);
+            temp = temp->next;
+        }
+        temp = head;
+        while (temp)
+        {
+            temp->value = st.top();
+            st.pop();
+            temp = temp->next;
+        }
+    }
     Node* middleElement()
     {
         Node* fast = head;
@@ -284,6 +324,20 @@ class LinkedList
         }
 
         return slow;
+    }
+
+    bool searchElement(int target)
+    {
+        Node* temp = head;
+        while (temp)
+        {
+            if (temp->value == target)
+            {
+                return true;
+            }
+            temp = temp->next;
+        }
+        return false;
     }
 };
 
@@ -326,8 +380,16 @@ int main()
     myll->append(50);
 
     myll->printList();
-    myll->reverseLinkedList();
+    // myll->bruteForceReverseLinkedList();
+    // myll->printList();
+    // myll->reverseLinkedList();
     myll->printList();
+    std::cout << "Striver's Logic " << std::endl;
+    Node* newHead = myll->striverReverseLinkedList();
+    myll->printList(newHead);
+    int targetToSearch = 50;
+    myll->searchElement(targetToSearch) ? std::cout << "found" << std::endl
+                                        : std::cout << "Not found" << std::endl;
     Node* ptr = myll->middleElement();
     std::cout << "Middle Ele: " << ptr->value << std::endl;
 
