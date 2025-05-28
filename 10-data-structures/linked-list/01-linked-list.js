@@ -80,7 +80,7 @@ class LinkedList {
    *
    * Displays the list in the format: value1 --> value2 --> ... --> null
    */
-  printList() {
+  printList(head = this.head) {
     let temp = this.head; // Start from the head
     let listString = "";
     while (temp !== null) {
@@ -173,6 +173,39 @@ class LinkedList {
   isEmpty() {
     return this.length === 0;
   }
+  /**
+   * @method reverse
+   * @description Reverse the linked list
+   * @returns {newHead} True if the list is empty, false otherwise.
+   */
+
+  reverseLinkedListBruteForce() {
+    const st = [];
+    let temp = this.head;
+    while (temp) {
+      st.push(temp.value);
+      temp = temp.next;
+    }
+    temp = this.head;
+    while (temp) {
+      temp.value = st.pop();
+      temp = temp.next;
+    }
+  }
+
+  reverseLinkedListOptimal() {
+    let temp = this.head;
+    let prev = null;
+    while (temp !== null) {
+      let front = temp.next; // Store next node
+      temp.next = prev; // Reverse the link
+      prev = temp; // Move prev forward
+      temp = front; // Move temp forward
+    }
+    this.tail = this.head; // Update tail to old head
+    this.head = prev; // Update head to new head
+    return this.head;
+  }
 }
 
 // --- Main execution block for demonstration ---
@@ -215,3 +248,13 @@ console.log("Is empty?", my_list.isEmpty()); // Output: Is empty? true
 console.log("\n--- Attempting to Delete from Empty List ---");
 my_list.deleteFirst(); // Output: Warning: Cannot delete from an empty list.
 my_list.deleteLast(); // Output: Warning: Cannot delete from an empty list.
+
+my_list.append(50);
+my_list.append(60);
+my_list.append(70);
+my_list.append(80);
+my_list.printList();
+// my_list.reverseLinkedListBruteForce();
+const newHead = my_list.reverseLinkedListOptimal();
+// console.log(newHead);
+my_list.printList();
