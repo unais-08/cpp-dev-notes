@@ -28,6 +28,7 @@ class LinkedList
     void deleteFirst();
 
     int getLength() const;
+    Node* getHead() { return this->head; };
 
     bool insert(int value, int index);
 
