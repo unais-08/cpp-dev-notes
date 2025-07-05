@@ -3,7 +3,7 @@
 #include <numeric>    // For std::accumulate (summing elements)
 #include <algorithm>  // For std::sort, std::min_element, std::max_element, std::reverse, std::find
 #include <map>        // For frequency counting (if needed, though can be done with sort+loop)
-
+#include <bits/stdc++.h>
 // --- Problem 1: Find the largest and smallest elements in an array/vector ---
 // Question: Given an array/vector of integers, find its maximum and minimum elements.
 // Example: Input: [3, 1, 4, 1, 5, 9, 2, 6] Output: Max: 9, Min: 1
@@ -437,6 +437,70 @@ void removeDuplicatesSorted()
     std::cout << "\nNew length (array): " << write_idx << std::endl;
 }
 
+/*🧠 1. Find the First Non-Repeating Element
+Level: Easy–Medium
+Problem:
+Given an array of integers, find the first element that does not repeat. If all elements repeat,
+return -1.
+🔍 Focus: Use a hash map to count frequency and then loop again to find the first with frequency 1.
+
+*/
+
+int non_repeating_element(std::vector<int>& v)
+{
+    std::map<int, int> mp;
+    for (int i = 0; i < v.size(); i++)
+    {
+        mp[v[i]]++;  // store element and its frequency
+    }
+    for (const auto& pair : mp)
+    {
+        if (pair.second == 1)
+        {
+            return pair.first;
+        }
+    }
+    return -1;
+}
+/*
+🔄 2. Rotate Array by K Positions
+Level: Medium
+Problem:
+Rotate the array to the right by k steps. You must do this in-place with O(1) extra space.
+
+🔍 Focus: Use reverse technique. First reverse the whole array, then reverse first k elements, then
+the remaining.
+*/
+
+void rotate_array_by_kth(std::vector<int>& v, int k)
+{
+    int n = v.size();
+    if (n == 0) return;
+    k = k % n;  // handle k > n
+    std::reverse(v.begin(), v.end());
+    std::reverse(v.begin(), v.begin() + k);
+    std::reverse(v.begin() + k, v.end());
+}
+/*
+🧩 3. Maximum Subarray Sum (Kadane’s Algorithm)
+Level: Medium
+Problem:
+Find the contiguous subarray within a 1D array which has the largest sum.
+
+🔍 Focus: Understand dynamic programming approach using Kadane’s Algorithm.
+*/
+
+int max_sub_sum(std::vector<int>& v)
+{
+    int max_sum = v.empty() ? 0 : v[0];
+    int curr_sum = v.empty() ? 0 : v[0];
+    for (size_t i = 1; i < v.size(); ++i)
+    {
+        curr_sum = std::max(v[i], curr_sum + v[i]);
+        max_sum = std::max(max_sum, curr_sum);
+    }
+    return max_sum;
+}
 int main()
 {
     findMinMax();
