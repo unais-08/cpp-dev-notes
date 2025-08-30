@@ -280,15 +280,6 @@ Beyond the execution phases and memory layout, several concepts are paramount fo
 
 Let's use a simple example to trace the process.
 
-**Project Structure:**
-
-```
-my_project/
-├── main.cpp
-├── math_operations.h
-└── math_operations.cpp
-
-```
 
 **`math_operations.h`:**
 
